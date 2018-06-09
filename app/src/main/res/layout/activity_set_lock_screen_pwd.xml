@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activitys.SetLockScreenPwdActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include
+            layout="@layout/toobal_titleblue"
+            />
+            <TextView
+                android:id="@+id/tv_reset"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="@string/lockpwd_reset"
+                android:layout_marginRight="@dimen/demen_10dp"
+                android:padding="@dimen/demen_10dp"
+                />
+    </RelativeLayout>
+    <com.github.ihsg.patternlocker.PatternIndicatorView
+        android:id="@+id/pattern_indicator_view"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_margin="20dp" />
+        <TextView
+            android:id="@+id/tv_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lockpwd_onehint"
+            android:layout_gravity="center_horizontal"
+            />
+    <com.github.ihsg.patternlocker.PatternLockerView
+        android:id="@+id/pattern_lock_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="20dp" />
+</LinearLayout>

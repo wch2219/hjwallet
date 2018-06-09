@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="zz.hjzn.hjwallet">
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-feature android:name="android.hardware.camera.front" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+
+    <application
+        android:name=".MyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="zz.hjzn.hjwallet.fileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <activity android:name=".MainActivity" />
+        <activity
+            android:name=".zxing.CaptureActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activitys.MyReceiptCodeActivity" />
+        <activity android:name=".activitys.SetLockScreenPwdActivity" />
+        <activity android:name=".activitys.StartPaymentActivity" />
+        <activity android:name=".activitys.PersionCenterActivity" />
+        <activity android:name=".activitys.SettActivity" />
+        <activity android:name=".activitys.LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activitys.RegisterActivity" />
+        <activity android:name=".activitys.ForgetPwdActivity" />
+        <activity android:name=".activitys.BillDescActivity"></activity>
+    </application>
+
+</manifest>

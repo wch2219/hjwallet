@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="#77000000"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:layout_alignParentBottom="true"
+        >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/demen_10dp"
+        >
+        <TextView
+            android:id="@+id/tv_close"
+            style="@style/TextView15blue"
+            android:text="@string/close"
+            android:padding="@dimen/demen_10dp"
+            />
+        <TextView
+            android:id="@+id/tv_aff"
+            style="@style/TextView15blue"
+            android:text="@string/aff"
+            android:layout_alignParentRight="true"
+            android:padding="@dimen/demen_10dp"
+            />
+    </RelativeLayout>
+    <View
+        style="@style/haveing"
+        />
+    <DatePicker
+        android:id="@+id/dp_selete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:datePickerMode="spinner"
+        android:calendarViewShown="false"
+        ></DatePicker>
+    </LinearLayout>
+</RelativeLayout>

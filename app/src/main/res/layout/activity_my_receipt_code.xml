@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activitys.MyReceiptCodeActivity">
+
+        <include
+            layout="@layout/toobal_titleblue"
+            />
+    
+        <TextView
+            style="@style/TextView15blue"
+            android:layout_gravity="center_horizontal"
+            android:padding="@dimen/text_dimens10"
+            android:text="@string/receipt_hint"
+            />
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:id="@+id/iv_code"
+                android:layout_marginTop="@dimen/demen_20dp"
+                android:layout_gravity="center"
+                />
+    <TextView
+        android:id="@+id/tv_savepic"
+        style="@style/TextView15blue"
+        android:layout_gravity="center_horizontal"
+        android:padding="@dimen/text_dimens10"
+        android:text="@string/receipt_savepic"
+        />
+
+
+</LinearLayout>

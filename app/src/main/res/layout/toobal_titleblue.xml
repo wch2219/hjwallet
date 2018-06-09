@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/colorPrimary"
+    android:layout_height="wrap_content">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/demen_20dp"
+
+        />
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/white"
+            android:lines="1"
+            android:ellipsize="end"
+            android:maxEms="8"
+            android:textSize="@dimen/text_dimens16" />
+            <TextView
+                android:id="@+id/tv_right"
+                style="@style/TextView15blue"
+                android:gravity="end"
+                android:padding="@dimen/demen_10dp"
+                android:layout_marginRight="@dimen/demen_10dp"
+                android:textColor="@color/white"
+                android:layout_gravity="end"
+                />
+    </android.support.v7.widget.Toolbar>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/demen_8dp"
+        android:background="@color/havling"
+       />
+</LinearLayout>
