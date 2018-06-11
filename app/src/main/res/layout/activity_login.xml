@@ -22,7 +22,7 @@
             android:layout_height="@dimen/demen_80dp"
             android:layout_marginTop="@dimen/demen_40dp"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/head"
+            android:src="@mipmap/logo"
             />
     <LinearLayout
         android:layout_width="match_parent"
@@ -116,8 +116,8 @@
         android:layout_marginTop="@dimen/demen_40dp"
         android:layout_marginLeft="@dimen/demen_40dp"
         android:layout_marginRight="@dimen/demen_40dp"
-        android:textColor="@color/gary_text"
-        android:background="@drawable/shape_payment_affgary"
+        android:textColor="@color/white"
+        android:background="@drawable/shape_payment_affblue"
         />
     </LinearLayout>
 </LinearLayout>

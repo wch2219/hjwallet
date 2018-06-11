@@ -13,7 +13,7 @@
             android:layout_width="@dimen/demen_80dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/demen_30dp"
-            android:src="@drawable/head"
+            android:src="@mipmap/icon_head"
             android:id="@+id/iv_head"
             android:layout_height="@dimen/demen_80dp" />
     <LinearLayout
@@ -64,7 +64,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/demen_40dp"
                 android:background="@null"
-                android:inputType="number|numberDecimal"
+                android:inputType="number"
                 android:textSize="@dimen/text_dimens13"
                 android:hint="@string/payment_inputhint"
                 android:layout_marginLeft="@dimen/demen_5dp"

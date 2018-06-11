@@ -305,9 +305,9 @@ public class QRCode {
                                 + IMAGE_HALFWIDTH, y - halfH + IMAGE_HALFWIDTH);
                     } else {
                         if (bitMatrix.get(x, y)) {
-                            pixels[y * size + x] = 0xff111111;
+                            pixels[y * size + x] = 0xff147fe1;
                             if(x<115&&(y<115||y>=size-115)||(y<115&&x>=size-115)){
-                                pixels[y * size + x] = 0xfff92736;
+                                pixels[y * size + x] = 0xff147fe1;
                             }
                         } else {
                             pixels[y * size + x] = 0xffffffff;

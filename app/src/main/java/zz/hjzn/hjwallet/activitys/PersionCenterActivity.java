@@ -11,6 +11,8 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.io.File;
 
 import butterknife.BindView;
@@ -106,6 +108,7 @@ public class PersionCenterActivity extends BaseActivity {
                     File filePath = UploadPicUtiles.getFilePath(data, ctx);
                     wch(filePath + "");
 //                    UpHead(filePath);
+                    Glide.with(ctx).load(filePath).into(ivHead);
                     break;
             }
         }

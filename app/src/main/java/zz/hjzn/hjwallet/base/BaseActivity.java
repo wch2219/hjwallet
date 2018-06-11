@@ -56,7 +56,7 @@ public abstract class BaseActivity<V,T extends Presenter<V>> extends AppCompatAc
         HideUtil.init(this);
         ctx = this;
         gson = new Gson();
-        setImmer(R.color.trans);
+//        setImmer(R.color.trans);
         vibrator=(Vibrator)getSystemService(Service.VIBRATOR_SERVICE);
         loading = new MyProgressLoading(ctx, R.style.DialogStyle);
         sp = getSharedPreferences(SpUtiles.SP_Mode,MODE_PRIVATE);

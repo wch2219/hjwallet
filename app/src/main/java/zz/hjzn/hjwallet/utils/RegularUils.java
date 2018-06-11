@@ -55,7 +55,10 @@ public class RegularUils {
      * 正则：IP地址
      */
     public static final String REGEX_IP            = "((2[0-4]\\d|25[0-5]|[01]?\\d\\d?)\\.){3}(2[0-4]\\d|25[0-5]|[01]?\\d\\d?)";
-
+    /**
+     * 请求地址
+     */
+    public static final  String HttpUrl = "^([hH][tT]{2}[pP]://|[hH][tT]{2}[pP][sS]://)(([A-Za-z0-9-~]+).)+([A-Za-z0-9-~\\\\/])+$";
     ///////////////////////////////////////////////////////////////////////////
     // 以下摘自http://tool.oschina.net/regex
     ///////////////////////////////////////////////////////////////////////////
@@ -244,6 +247,10 @@ public class RegularUils {
      */
     public static boolean isDate(final CharSequence input) {
         return isMatch(REGEX_DATE, input);
+    }
+
+    public static boolean isHttp(CharSequence input){
+        return isMatch(HttpUrl,input);
     }
 
     /**

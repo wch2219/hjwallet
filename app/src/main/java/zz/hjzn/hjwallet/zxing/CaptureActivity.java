@@ -7,6 +7,7 @@ import android.hardware.Camera;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
@@ -28,6 +29,7 @@ import butterknife.BindView;
 import zz.hjzn.hjwallet.R;
 import zz.hjzn.hjwallet.base.BaseActivity;
 import zz.hjzn.hjwallet.base.Presenter;
+import zz.hjzn.hjwallet.utils.RegularUils;
 import zz.hjzn.hjwallet.zxing.camera.CameraManager;
 import zz.hjzn.hjwallet.zxing.decoding.CaptureActivityHandler;
 import zz.hjzn.hjwallet.zxing.decoding.InactivityTimer;
@@ -164,14 +166,21 @@ public class CaptureActivity extends BaseActivity implements Callback {
         if (resultString.equals("")) {
             Toast.makeText(CaptureActivity.this, "Scan failed!", Toast.LENGTH_SHORT).show();
         } else {
+            boolean http = RegularUils.isHttp(resultString);
+//            if (http) {//是网址
+//                Uri uri = Uri.parse(resultString);
+//                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+//                startActivity(intent);
+//            }else {
 //			System.out.println("Result:"+resultString);
-            Intent resultIntent = new Intent();
-            Bundle bundle = new Bundle();
-            bundle.putString("result", resultString);
-            resultIntent.putExtras(bundle);
-            this.setResult(RESULT_OK, resultIntent);
+                Intent resultIntent = new Intent();
+                Bundle bundle = new Bundle();
+                bundle.putString("result", resultString);
+                resultIntent.putExtras(bundle);
+                this.setResult(RESULT_OK, resultIntent);
+                CaptureActivity.this.finish();
+//            }
         }
-        CaptureActivity.this.finish();
     }
 
     private void initCamera(SurfaceHolder surfaceHolder) {

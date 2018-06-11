@@ -48,13 +48,16 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        etPhone.setText("18637051978");
-        etPwd.setText("w.s012345");
+        String string = sp.getString(SpUtiles.sessionId, "");
+        if (!TextUtils.isEmpty(string)) {
+            startActivity(new Intent(ctx,MainActivity.class));
+            finish();
+        }
     }
 
     @Override
     protected void initListener() {
-
+//        etPwd.addTextChangedListener(new );
     }
 
     @Override
@@ -97,6 +100,7 @@ public class LoginActivity extends BaseActivity {
         if (loginMode.getErrCode() == RequestCode.SuccessCode) {
             LoginMode.ResultBean result = loginMode.getResult();
             sp.edit().putString(SpUtiles.sessionId, result.getSessionId()).commit();
+            wch(result.getSessionId());
             startActivity(new Intent(ctx, MainActivity.class));
             finish();
         } else {

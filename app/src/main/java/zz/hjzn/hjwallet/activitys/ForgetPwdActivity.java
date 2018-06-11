@@ -20,6 +20,7 @@ import butterknife.OnClick;
 import zz.hjzn.hjwallet.R;
 import zz.hjzn.hjwallet.base.BaseActivity;
 import zz.hjzn.hjwallet.base.Presenter;
+import zz.hjzn.hjwallet.lisenter.PayMentEditetxtListener;
 import zz.hjzn.hjwallet.model.PublicModel;
 import zz.hjzn.hjwallet.utils.ButtonUtils;
 import zz.hjzn.hjwallet.utils.NetUtils;
@@ -56,19 +57,21 @@ public class ForgetPwdActivity extends BaseActivity {
     @Override
     protected void initData() {
         tvTitle.setText(R.string.forgetPwd);
-        initTabBar(toolBar,true);
+        initTabBar(toolBar, true);
     }
 
     @Override
     protected void initListener() {
-
+    etPhone.addTextChangedListener(new PayMentEditetxtListener(ctx,btnGetauth,true));
     }
 
     @Override
     protected Presenter createPresenter() {
         return new Presenter(this);
     }
+
     private boolean ischek;
+
     @OnClick({R.id.btn_getauth, R.id.btn_aff})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -81,9 +84,50 @@ public class ForgetPwdActivity extends BaseActivity {
                 }
                 break;
             case R.id.btn_aff:
+                String phone = etPhone.getText().toString().trim();
+                String code = etAuthcode.getText().toString().trim();
+                String pwd = etPwd.getText().toString().trim();
+                String affpwd = etAffpwd.getText().toString().trim();
+                if (TextUtils.isEmpty(phone)) {
+                    vibrator.vibrate(100);
+                    Toast.makeText(ctx, "手机号不能为空", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(code)) {
+                    vibrator.vibrate(100);
+                    Toast.makeText(ctx, "验证码不能为空", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(pwd)) {
+                    vibrator.vibrate(100);
+                    Toast.makeText(ctx, "密码不能为空", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(affpwd)) {
+                    vibrator.vibrate(100);
+                    Toast.makeText(ctx, "确认密码不能为空", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                wch(pwd+";"+affpwd);
+                if (!pwd.equals(affpwd)) {
+                    vibrator.vibrate(100);
+                    Toast.makeText(ctx, "两次密码不一致，请重新设置", Toast.LENGTH_SHORT).show();
+                    etPwd.setText("");
+                    etAffpwd.setText("");
+                    return;
+                }
+                HttpType = 1;
+                Map<String,Object> map = new HashMap<>();
+                map.put(Parments.loginAccount,phone);
+                map.put(Parments.verifyCode,code);
+                map.put("password",pwd);
+                map.put("pwdType","1");
+                map.put("confirmPassword",affpwd);
+                mPreenter.fetch(map,true,NetUtils.ForgetPwd,"");
                 break;
         }
     }
+
     @Override
     public void showData(String s) throws IOException {
         dissProgress();
@@ -110,8 +154,15 @@ public class ForgetPwdActivity extends BaseActivity {
             } else {
                 Toast.makeText(ctx, publicModel.getErrDesc(), Toast.LENGTH_SHORT).show();
             }
+        }else{
+            PublicModel publicModel = gson.fromJson(s, PublicModel.class);
+            if (publicModel.getErrCode() == RequestCode.SuccessCode) {
+                finish();
+            }
+            Toast.makeText(ctx, publicModel.getErrDesc(), Toast.LENGTH_SHORT).show();
         }
     }
+
     private void sendSms() {
         String phone = etPhone.getText().toString().trim();
         if (TextUtils.isEmpty(phone) | !RegularUils.isMobileExact(phone)) {

@@ -11,4 +11,7 @@ public class Parments {
     public static final String confirmPayPassWord = "confirmPayPassWord";//确认交易密码
     public static final String regType = "regType";//注册类型注册方式,1:邮箱注册,2:手机注册 3：第三方账号
     public static final String verifyCode = "verifyCode";//验证码
+    public static final String SessionId = "appSessionId";//会话Id
+    public static final String outAddress = "outAddress";
+    public static String transferAmount = "transferAmount";//数量
 }

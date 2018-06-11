@@ -28,6 +28,7 @@ import java.util.Date;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import zz.hjzn.hjwallet.MyApplication;
 import zz.hjzn.hjwallet.R;
 import zz.hjzn.hjwallet.base.BaseActivity;
 import zz.hjzn.hjwallet.base.Presenter;
@@ -59,8 +60,9 @@ public class MyReceiptCodeActivity extends BaseActivity {
         tvTitle.setText("我的收款码");
         tvRight.setText(R.string.receipt_history);
         initTabBar(toolBar, false);
-        bitmapcode = QRCode.createQRCodeWithLogo2("https://u.wechat.com/EOxdE91rCItXs9e-uyFHfhk",
-                500, drawableToBitmap(getResources().getDrawable(R.drawable.head)));
+        String walletAddress = MyApplication.persionInfoModel.getResult().getWalletAddress();
+        bitmapcode = QRCode.createQRCodeWithLogo6(walletAddress,
+                500, drawableToBitmap(getResources().getDrawable(R.mipmap.logo)));
         ivCode.setImageBitmap(bitmapcode);
     }
 

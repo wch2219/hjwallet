@@ -24,6 +24,7 @@ import zz.hjzn.hjwallet.activitys.StartPaymentActivity;
 import zz.hjzn.hjwallet.base.BaseFragment;
 import zz.hjzn.hjwallet.base.Presenter;
 import zz.hjzn.hjwallet.utils.IntentTag;
+import zz.hjzn.hjwallet.utils.RegularUils;
 import zz.hjzn.hjwallet.utils.SetBanner;
 import zz.hjzn.hjwallet.zxing.CaptureActivity;
 
@@ -52,10 +53,7 @@ public class HomeFragment extends BaseFragment {
     @Override
     protected void initData() {
         List<Integer> banners = new ArrayList<>();
-        banners.add(R.drawable.head);
-        banners.add(R.drawable.head);
-        banners.add(R.drawable.head);
-        banners.add(R.drawable.head);
+        banners.add(R.mipmap.bannder);
         SetBanner.startBanner(ctx,banner,banners);
     }
 
@@ -76,7 +74,7 @@ public class HomeFragment extends BaseFragment {
         Intent intent;
         switch (view.getId()) {
             case R.id.btn_flick:
-                intent = new Intent(getActivity(), StartPaymentActivity.class);
+                intent = new Intent(getActivity(), CaptureActivity.class);
                 startActivityForResult(intent, 5);
                 break;
             case R.id.btn_receiptcode:
@@ -84,19 +82,17 @@ public class HomeFragment extends BaseFragment {
                 break;
         }
     }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 5 && resultCode == getActivity().RESULT_OK) {
             Bundle bundle = data.getExtras();
             String datas = bundle.getString("result");
             Log.d("wch",   datas);
+
             Intent intent = new Intent(ctx,StartPaymentActivity.class);
             intent.putExtra(IntentTag.ResultCode,datas);
             startActivity(intent);
         }
     }
-
-
 
 }

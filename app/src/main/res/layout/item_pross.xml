@@ -16,7 +16,7 @@
             android:layout_width="@dimen/demen_30dp"
             android:layout_height="@dimen/demen_30dp"
             android:layout_gravity="center_horizontal"
-            app:indicator_color="@color/colorAccent"
+            app:indicator_color="@color/colorPrimary"
             app:indicator="LineSpinFadeLoader"
             />
         <TextView
@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="正在加载..."
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/colorPrimary"
             android:layout_marginTop="@dimen/demen_3dp"
             />
     </LinearLayout>

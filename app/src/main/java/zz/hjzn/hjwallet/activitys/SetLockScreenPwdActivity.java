@@ -48,7 +48,7 @@ public class SetLockScreenPwdActivity extends BaseActivity implements OnPatternC
     @Override
     protected void initData() {
         tvTitle.setText("设置手势密码");
-        initTabBar(toolBar, true);
+        initTabBar(toolBar, false);
     }
 
     @Override

@@ -3,85 +3,102 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     android:orientation="vertical"
-    android:background="@color/gary_bg"
     tools:context=".fragments.MyFragment">
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/easylayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible">
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@mipmap/icon_wobg"
-            >
+            android:layout_height="match_parent"
+            android:background="@color/gary_bg"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/icon_wobg"
+                android:orientation="vertical">
+
                 <TextView
                     style="@style/TextView15blue"
-                    android:textColor="@color/white"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="@dimen/demen_25dp"
                     android:text="@string/wode"
-                    />
+                    android:textColor="@color/white" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:layout_marginTop="@dimen/text_dimens10"
-                    android:padding="@dimen/demen_10dp"
-                    >
-                        <zz.hjzn.hjwallet.weight.CircleImageView
-                            android:id="@+id/iv_head"
-                            android:layout_width="@dimen/demen_60dp"
-                            android:layout_height="@dimen/demen_60dp"
-                            android:src="@drawable/head"
-                            />
+                    android:orientation="horizontal"
+                    android:padding="@dimen/demen_10dp">
+
+                    <zz.hjzn.hjwallet.weight.CircleImageView
+                        android:id="@+id/iv_head"
+                        android:layout_width="@dimen/demen_60dp"
+                        android:layout_height="@dimen/demen_60dp"
+                        android:src="@mipmap/icon_head" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/demen_10dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_nickname"
+                            style="@style/TextView15blue"
+                            android:enabled="true"
+                            android:focusable="true"
+                            android:longClickable="true"
+                            android:text="李小胖"
+                            android:textColor="@color/white"
+                            android:textIsSelectable="true" />
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/demen_10dp"
-                            android:layout_gravity="center_vertical"
-                            android:orientation="vertical"
-                            >
-                                <TextView
-                                    style="@style/TextView15blue"
-                                    android:textColor="@color/white"
-                                    android:id="@+id/tv_nickname"
-                                    android:text="李小胖"
-                                    />
-                                <LinearLayout
-                                    android:layout_marginTop="@dimen/text_dimens10"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    >
-                                        <TextView
-                                            style="@style/TextView15blue"
-                                            android:textColor="@color/white"
-                                            android:text="@string/Gscyue"
-                                            />
-                                        <TextView
-                                            style="@style/TextView15blue"
-                                            android:textColor="@color/white"
-                                            android:id="@+id/tv_gscnum"
-                                            android:text="4555.222222"
-                                            />
-                                </LinearLayout>
+                            android:layout_marginTop="@dimen/text_dimens10"
+                            android:orientation="horizontal">
 
+                            <TextView
+                                style="@style/TextView15blue"
+                                android:text="@string/Gscyue"
+                                android:textColor="@color/white" />
+
+                            <TextView
+                                android:id="@+id/tv_gscnum"
+                                style="@style/TextView15blue"
+                                android:text="4555.222222"
+                                android:textColor="@color/white" />
                         </LinearLayout>
+
+                    </LinearLayout>
                 </LinearLayout>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:orientation="vertical"
-            >
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical">
+
                 <View
                     style="@style/haveing"
-                    android:layout_height="@dimen/demen_8dp"
-                    />
-               <ListView
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:id="@+id/lv_list"
-                   ></ListView>
-        </LinearLayout>
+                    android:layout_height="@dimen/demen_8dp" />
 
+                <ListView
+                    android:id="@+id/lv_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></ListView>
+            </LinearLayout>
+        </LinearLayout>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 </LinearLayout>

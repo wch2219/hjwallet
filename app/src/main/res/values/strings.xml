@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">wallet</string>
+    <string name="app_name">轻链</string>
     <string name="paypwdwindowhint">输入交易密码</string>
     <string name="forgetpaypwd">忘记密码</string>
 
