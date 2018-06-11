@@ -68,6 +68,7 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
                     Manifest.permission.READ_CONTACTS, Manifest.permission.CAMERA
             }, 1002);
         }
+        register();
     }
 
     @Override

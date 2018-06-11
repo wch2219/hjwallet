@@ -12,6 +12,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import zz.hjzn.hjwallet.MainActivity;
 import zz.hjzn.hjwallet.R;
 import zz.hjzn.hjwallet.base.BaseActivity;
 import zz.hjzn.hjwallet.base.Presenter;
@@ -77,6 +78,9 @@ public class SettActivity extends BaseActivity {
                 startActivity(new Intent(ctx,SetLockScreenPwdActivity.class));
                 break;
             case R.id.btn_exit://退出登录
+                sp.edit().putString(SpUtiles.sessionId,"").commit();
+                finish();
+                close();
                 break;
         }
     }
