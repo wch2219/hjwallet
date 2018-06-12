@@ -6,20 +6,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.List;
+
 import zz.hjzn.hjwallet.R;
 import zz.hjzn.hjwallet.base.BaseFastAdapter;
+import zz.hjzn.hjwallet.model.BiollDescModel;
 
 /**
  * 账单明细
  */
 public class BillDescAdapter extends BaseFastAdapter {
-    public BillDescAdapter(Context ctx) {
+    private List<BiollDescModel.ResultBean> result;
+
+    public BillDescAdapter(Context ctx,List<BiollDescModel.ResultBean> result) {
         super(ctx);
+        this.result = result;
     }
 
     @Override
     public int getCount() {
-        return 10;
+        return result.size();
     }
 
     @Override
@@ -32,6 +38,10 @@ public class BillDescAdapter extends BaseFastAdapter {
         }else{
             vh = (ViewHolder) convertView.getTag();
         }
+        BiollDescModel.ResultBean resultBean = result.get(position);
+        vh.tv_time.setText(resultBean.getChangeTimeStr());
+        vh.tv_num.setText(resultBean.getChangeValue()+" Gsc");
+
         return convertView;
     }
 

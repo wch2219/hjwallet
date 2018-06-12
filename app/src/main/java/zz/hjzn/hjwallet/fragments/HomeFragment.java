@@ -22,6 +22,7 @@ import butterknife.Unbinder;
 import zz.hjzn.hjwallet.R;
 import zz.hjzn.hjwallet.activitys.EntryOtherActivity;
 import zz.hjzn.hjwallet.activitys.MyReceiptCodeActivity;
+import zz.hjzn.hjwallet.activitys.PaySuccessActivity;
 import zz.hjzn.hjwallet.activitys.StartPaymentActivity;
 import zz.hjzn.hjwallet.base.BaseFragment;
 import zz.hjzn.hjwallet.base.Presenter;
@@ -76,6 +77,7 @@ public class HomeFragment extends BaseFragment {
         switch (view.getId()) {
             case R.id.btn_flick:
                 intent = new Intent(getActivity(), CaptureActivity.class);
+
                 startActivityForResult(intent, 5);
                 break;
             case R.id.btn_receiptcode:
@@ -92,6 +94,7 @@ public class HomeFragment extends BaseFragment {
             if (!TextUtils.isEmpty(datas)&&datas.length() == 34) {
 
                 Intent intent = new Intent(ctx,StartPaymentActivity.class);
+
                 intent.putExtra(IntentTag.ResultCode,datas);
                 startActivity(intent);
             }else{

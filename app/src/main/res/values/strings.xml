@@ -60,4 +60,8 @@
     <string name="inputAddressTitle">输入地址</string>
     <string name="resultTitel">扫描结果</string>
     <string name="forgetpayPwd">修改支付密码</string>
+    <string name="paySuccess">支付成功,</string>
+    <string name="selfmotionexit">后自动退出</string>
+    <string name="Success">成功</string>
+    <string name="address">转账地址：</string>
 </resources>

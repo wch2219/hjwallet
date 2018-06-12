@@ -55,9 +55,7 @@
                         <TextView
                             android:id="@+id/tv_nickname"
                             style="@style/TextView15blue"
-                            android:enabled="true"
-                            android:focusable="true"
-                            android:longClickable="true"
+
                             android:text="李小胖"
                             android:textColor="@color/white"
                             android:textIsSelectable="true" />

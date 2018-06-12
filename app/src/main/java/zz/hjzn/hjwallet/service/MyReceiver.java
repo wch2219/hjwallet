@@ -52,53 +52,10 @@ public class MyReceiver extends BroadcastReceiver {
                 Log.d(TAG, "[NotiReceiver] 接收到推送下来的通知的ID: " + notifactionId);
                 processCustomMessage(context, bundle);
             } else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
-                Log.i("wch", "[NotiReceiver] 用户点击打开了通知" );
-                Intent inten = null;
-//                Gson gson = new Gson();
-//                NotifitBean notifitBean = gson.fromJson(MyApplication.EXTRAS, NotifitBean.class);
-//                int type = notifitBean.getType();
-////                1:同意申请加入班级，给申请人推消息
-////                2:被设置为任课老师
-////                3:请出班级
-////                4:退班申请成功
-////                5:申请加入班级，给老师推消息
-////                6:申请退出班级，给老师推消息
-//                switch (type) {
-//                    case 1://同意入班
-//                        inten = new Intent(context, ClassManageActivity.class);
-//                        inten.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                        context.startActivity(inten);
-//                        break;
-//                    case 2://2:被设置为任课老师
-//                        inten = new Intent(context, ClassManageActivity.class);
-//                        inten.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                        context.startActivity(inten);
-//                        break;
-//                    case 3:// 3:请出班级
-//                        inten = new Intent(context, ClassManageActivity.class);
-//                        inten.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                        context.startActivity(inten);
-//                        break;
-//                    case 4:// 3:请出班级
-//                        inten = new Intent(context, ClassManageActivity.class);
-//                        inten.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                        context.startActivity(inten);
-//                        break;
-//
-//                    case 5://申请加入班级，老师收到消息
-//                        inten = new Intent(context, ClassManageActivity.class);
-//                        inten.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                        context.startActivity(inten);
-//                        break;
-//                    case 6:
-//
-//                        break;
-//                    case 7://收到通知 请及时点阅
-//                        inten = new Intent(context, ClassHistoryNewsActivitry.class);
-//                        inten.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                        context.startActivity(inten);
-//                        break;
-//                }
+                Log.i("wch", "[NotiReceiver] 用户点击打开了通知");
+                Intent intent1 = new Intent(ctx, MainActivity.class);
+                intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                context.startActivity(intent1);
             } else if (JPushInterface.ACTION_RICHPUSH_CALLBACK.equals(intent.getAction())) {
                 Log.i(TAG, "[NotiReceiver] 用户收到到RICH PUSH CALLBACK: " + bundle.getString(JPushInterface.EXTRA_EXTRA));
                 //在这里根据 JPushInterface.EXTRA_EXTRA 的内容处理代码，比如打开新的Activity， 打开一个网页等..

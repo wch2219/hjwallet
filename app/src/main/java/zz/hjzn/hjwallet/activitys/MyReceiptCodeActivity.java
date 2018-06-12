@@ -48,6 +48,8 @@ public class MyReceiptCodeActivity extends BaseActivity {
     TextView tvRight;
     @BindView(R.id.tv_savepic)
     TextView tvSavepic;
+    @BindView(R.id.tv_address)
+    TextView tv_address;
     private Bitmap bitmapcode;//保存的二维码图片
 
     @Override
@@ -64,6 +66,7 @@ public class MyReceiptCodeActivity extends BaseActivity {
         bitmapcode = QRCode.createQRCodeWithLogo6(walletAddress,
                 500, drawableToBitmap(getResources().getDrawable(R.mipmap.logo)));
         ivCode.setImageBitmap(bitmapcode);
+        tv_address.setText(walletAddress);
     }
 
     @Override

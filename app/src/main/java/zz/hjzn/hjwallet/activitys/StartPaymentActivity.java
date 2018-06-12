@@ -1,6 +1,7 @@
 package zz.hjzn.hjwallet.activitys;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.widget.Button;
@@ -97,8 +98,6 @@ public class StartPaymentActivity extends BaseActivity {
                 mPreenter.fetch(map, true, NetUtils.CheckPayPwd, null);
             }
         });
-
-
     }
 
     @Override
@@ -107,7 +106,6 @@ public class StartPaymentActivity extends BaseActivity {
         if (HttpType == 0) {
             PublicModel publicModel = gson.fromJson(s, PublicModel.class);
             if (publicModel.getErrCode() == RequestCode.SuccessCode) {
-
                 HttpType = 1;
                 Map<String, String> map = new HashMap<>();
                 map.put(Parments.SessionId, sp.getString(SpUtiles.sessionId, ""));
@@ -120,7 +118,9 @@ public class StartPaymentActivity extends BaseActivity {
         } else {
             PublicModel publicModel = gson.fromJson(s, PublicModel.class);
             if (publicModel.getErrCode() == RequestCode.SuccessCode) {
-                finish();
+               Intent intent = new Intent(ctx, PaySuccessActivity.class);
+               startActivity(intent);
+               finish();
             }
             Toast.makeText(ctx, publicModel.getErrDesc(), Toast.LENGTH_SHORT).show();
         }

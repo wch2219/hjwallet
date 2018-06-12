@@ -86,6 +86,7 @@ public class SettActivity extends BaseActivity {
             case R.id.btn_exit://退出登录
                 sp.edit().putString(SpUtiles.sessionId,"").commit();
                 finish();
+                startActivity(new Intent(ctx,LoginActivity.class));
                 close();
                 break;
         }

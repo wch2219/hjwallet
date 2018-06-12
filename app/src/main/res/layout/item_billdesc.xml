@@ -18,7 +18,7 @@
             <TextView
                 android:id="@+id/tv_name"
                 style="@style/TextView13black"
-                android:text="转出-唐"
+                android:text="转出"
                 />
                 <TextView
                     android:id="@+id/tv_time"

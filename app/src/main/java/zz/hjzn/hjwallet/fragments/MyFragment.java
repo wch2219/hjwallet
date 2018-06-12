@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.tencent.bugly.Bugly;
+import com.tencent.bugly.beta.Beta;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -115,7 +117,7 @@ public class MyFragment extends BaseFragment implements AdapterView.OnItemClickL
 
                 break;
             case 3://版本检查
-
+                Beta.checkUpgrade();
                 break;
             case 4://设置
                 startActivity(new Intent(ctx, SettActivity.class));
