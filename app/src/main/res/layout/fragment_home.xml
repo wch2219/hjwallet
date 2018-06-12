@@ -12,7 +12,7 @@
             android:layout_height="200dp">
         </com.youth.banner.Banner>
         <LinearLayout
-            android:layout_marginTop="@dimen/demen_20dp"
+            android:paddingTop="@dimen/demen_20dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
@@ -23,8 +23,6 @@
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/shape_home_sao_bg"
                 android:layout_height="@dimen/demen_100dp">
-
-
                 <Button
                     android:id="@+id/btn_flick"
                     android:layout_width="@dimen/demen_60dp"

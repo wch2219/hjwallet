@@ -7,16 +7,17 @@ import android.hardware.Camera;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
+import android.support.v7.widget.Toolbar;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.zxing.BarcodeFormat;
@@ -26,7 +27,10 @@ import java.io.IOException;
 import java.util.Vector;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import zz.hjzn.hjwallet.R;
+import zz.hjzn.hjwallet.activitys.InPutAddressActivity;
 import zz.hjzn.hjwallet.base.BaseActivity;
 import zz.hjzn.hjwallet.base.Presenter;
 import zz.hjzn.hjwallet.utils.RegularUils;
@@ -48,6 +52,12 @@ public class CaptureActivity extends BaseActivity implements Callback {
     ViewfinderView viewfinderView;
     @BindView(R.id.imageView2)
     ImageButton imageView2;
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
+    @BindView(R.id.tv_right)
+    TextView tvRight;
+    @BindView(R.id.tool_bar)
+    Toolbar toolBar;
     private CaptureActivityHandler handler;
 
     private boolean hasSurface;
@@ -64,7 +74,9 @@ public class CaptureActivity extends BaseActivity implements Callback {
 
     @Override
     protected void initData() {
-
+        tvTitle.setText(R.string.CaptureCodeTitle);
+        tvRight.setText(R.string.NoShibie);
+        initTabBar(toolBar,false);
     }
 
     @Override
@@ -79,6 +91,7 @@ public class CaptureActivity extends BaseActivity implements Callback {
         hasSurface = false;
         inactivityTimer = new InactivityTimer(this);
 //        initToolBar(toolbar);
+
     }
 
 
@@ -109,6 +122,7 @@ public class CaptureActivity extends BaseActivity implements Callback {
             }
         });
     }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -173,12 +187,12 @@ public class CaptureActivity extends BaseActivity implements Callback {
 //                startActivity(intent);
 //            }else {
 //			System.out.println("Result:"+resultString);
-                Intent resultIntent = new Intent();
-                Bundle bundle = new Bundle();
-                bundle.putString("result", resultString);
-                resultIntent.putExtras(bundle);
-                this.setResult(RESULT_OK, resultIntent);
-                CaptureActivity.this.finish();
+            Intent resultIntent = new Intent();
+            Bundle bundle = new Bundle();
+            bundle.putString("result", resultString);
+            resultIntent.putExtras(bundle);
+            this.setResult(RESULT_OK, resultIntent);
+            CaptureActivity.this.finish();
 //            }
         }
     }
@@ -278,4 +292,9 @@ public class CaptureActivity extends BaseActivity implements Callback {
     };
 
 
+
+    @OnClick(R.id.tool_bar)
+    public void onViewClicked() {
+        startActivity(new Intent(ctx,InPutAddressActivity.class));
+    }
 }

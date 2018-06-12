@@ -6,6 +6,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -34,7 +35,8 @@ public class SettActivity extends BaseActivity {
     LinearLayout llOpengesture;
     @BindView(R.id.btn_exit)
     Button btnExit;
-
+    @BindView(R.id.iv_swich)
+    ImageView ivSwich;
     @Override
     protected void initView() {
         setContentView(R.layout.activity_sett);
@@ -56,7 +58,9 @@ public class SettActivity extends BaseActivity {
         super.onResume();
         String lockpwd = sp.getString(SpUtiles.LockScreenPwd, "");
         if (TextUtils.isEmpty(lockpwd)) {
-
+            ivSwich.setImageResource(R.mipmap.icon_shut);
+        }else{
+            ivSwich.setImageResource(R.mipmap.icon_open);
         }
     }
 
@@ -71,8 +75,10 @@ public class SettActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_changepwd://修改登录密码
+                startActivity(new Intent(ctx,ForgetPwdActivity.class));
                 break;
             case R.id.ll_changepaypwd://修改交易密码
+                startActivity(new Intent(ctx,ChangePayPwdActivity.class));
                 break;
             case R.id.ll_opengesture://开启手势解锁
                 startActivity(new Intent(ctx,SetLockScreenPwdActivity.class));

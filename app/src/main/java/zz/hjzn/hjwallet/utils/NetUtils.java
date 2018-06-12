@@ -12,4 +12,5 @@ public class NetUtils {
     public static final String GetPersionInfo = BaseUrl + "d-app/API/book/getUserBook";//余额
     public static final String PayGsc = BaseUrl + "d-app/ore/transferToOthers.do";//转账
     public static final String ForgetPwd = BaseUrl + "d-app/API/restPwd";
+    public static final String CheckPayPwd = BaseUrl + "d-app/API/book/confirmPaypassword";//校验支付密码
 }

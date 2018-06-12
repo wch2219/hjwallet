@@ -3,6 +3,7 @@ package zz.hjzn.hjwallet.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import zz.hjzn.hjwallet.R;
+import zz.hjzn.hjwallet.activitys.EntryOtherActivity;
 import zz.hjzn.hjwallet.activitys.MyReceiptCodeActivity;
 import zz.hjzn.hjwallet.activitys.StartPaymentActivity;
 import zz.hjzn.hjwallet.base.BaseFragment;
@@ -36,7 +38,6 @@ public class HomeFragment extends BaseFragment {
     Button btnFlick;
     @BindView(R.id.btn_receiptcode)
     Button btnReceiptcode;
-    Unbinder unbinder;
     @BindView(R.id.banner)
     Banner banner;
 
@@ -88,10 +89,16 @@ public class HomeFragment extends BaseFragment {
             Bundle bundle = data.getExtras();
             String datas = bundle.getString("result");
             Log.d("wch",   datas);
+            if (!TextUtils.isEmpty(datas)&&datas.length() == 34) {
 
-            Intent intent = new Intent(ctx,StartPaymentActivity.class);
-            intent.putExtra(IntentTag.ResultCode,datas);
-            startActivity(intent);
+                Intent intent = new Intent(ctx,StartPaymentActivity.class);
+                intent.putExtra(IntentTag.ResultCode,datas);
+                startActivity(intent);
+            }else{
+                Intent intent = new Intent(ctx,EntryOtherActivity.class);
+                intent.putExtra(IntentTag.ResultCode,datas);
+                startActivity(intent);
+            }
         }
     }
 

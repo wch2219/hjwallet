@@ -1,5 +1,6 @@
 package zz.hjzn.hjwallet.activitys;
 
+import android.app.Activity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.widget.Button;
@@ -23,6 +24,7 @@ import zz.hjzn.hjwallet.model.PublicModel;
 import zz.hjzn.hjwallet.utils.IntentTag;
 import zz.hjzn.hjwallet.utils.NetUtils;
 import zz.hjzn.hjwallet.utils.Parments;
+import zz.hjzn.hjwallet.utils.PayWindowUtils;
 import zz.hjzn.hjwallet.utils.RegularUils;
 import zz.hjzn.hjwallet.utils.RequestCode;
 import zz.hjzn.hjwallet.utils.SpUtiles;
@@ -46,6 +48,8 @@ public class StartPaymentActivity extends BaseActivity {
     @BindView(R.id.btn_aff)
     Button btnAff;
     private String walltAddress;
+    private int HttpType;//0  支付密码校验  1  转账
+    private String num;
 
     @Override
     protected void initView() {
@@ -71,7 +75,7 @@ public class StartPaymentActivity extends BaseActivity {
 
     @OnClick(R.id.btn_aff)
     public void onViewClicked() {
-        String num = etNum.getText().toString();
+        num = etNum.getText().toString();
         if (TextUtils.isEmpty(num)) {
             vibrator.vibrate(100);
             Toast.makeText(ctx, "数量不能为空", Toast.LENGTH_SHORT).show();
@@ -81,12 +85,18 @@ public class StartPaymentActivity extends BaseActivity {
             Toast.makeText(ctx, "输入错误", Toast.LENGTH_SHORT).show();
             return;
         }
-        Map<String,Object> map = new HashMap<>();
-        map.put(Parments.SessionId, sp.getString(SpUtiles.sessionId,""));
-        map.put(Parments.transferAmount,num);
-        map.put(Parments.outAddress,walltAddress);
 
-        mPreenter.fetch(map,false, NetUtils.PayGsc,"");
+        PayWindowUtils.show((Activity) ctx);
+        PayWindowUtils.setResultCallBack(new PayWindowUtils.ResultCallBack() {
+            @Override
+            public void result(String result) {
+                HttpType = 0;
+                Map<String, String> map = new HashMap<>();
+                map.put(Parments.SessionId, sp.getString(SpUtiles.sessionId, ""));
+                map.put("payPassword", result);
+                mPreenter.fetch(map, true, NetUtils.CheckPayPwd, null);
+            }
+        });
 
 
     }
@@ -94,11 +104,25 @@ public class StartPaymentActivity extends BaseActivity {
     @Override
     public void showData(String s) throws IOException {
         dissProgress();
-        System.out.print(s);
-        PublicModel publicModel = gson.fromJson(s, PublicModel.class);
-        if (publicModel.getErrCode() == RequestCode.SuccessCode) {
-           finish();
+        if (HttpType == 0) {
+            PublicModel publicModel = gson.fromJson(s, PublicModel.class);
+            if (publicModel.getErrCode() == RequestCode.SuccessCode) {
+
+                HttpType = 1;
+                Map<String, String> map = new HashMap<>();
+                map.put(Parments.SessionId, sp.getString(SpUtiles.sessionId, ""));
+                map.put(Parments.transferAmount, num);
+                map.put(Parments.outAddress, walltAddress);
+                mPreenter.fetch(map, false, NetUtils.PayGsc, "");
+            }else{
+                Toast.makeText(ctx, publicModel.getErrDesc(), Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            PublicModel publicModel = gson.fromJson(s, PublicModel.class);
+            if (publicModel.getErrCode() == RequestCode.SuccessCode) {
+                finish();
+            }
+            Toast.makeText(ctx, publicModel.getErrDesc(), Toast.LENGTH_SHORT).show();
         }
-        Toast.makeText(ctx, publicModel.getErrDesc(), Toast.LENGTH_SHORT).show();
     }
 }
