@@ -2,24 +2,40 @@ package zz.hjzn.hjwallet.activitys;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.Response;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import zz.hjzn.hjwallet.R;
 import zz.hjzn.hjwallet.base.BaseActivity;
 import zz.hjzn.hjwallet.base.Presenter;
+import zz.hjzn.hjwallet.model.PublicModel;
+import zz.hjzn.hjwallet.utils.NetUtils;
+import zz.hjzn.hjwallet.utils.Parments;
+import zz.hjzn.hjwallet.utils.RequestCode;
+import zz.hjzn.hjwallet.utils.SpUtiles;
 import zz.hjzn.hjwallet.utils.UploadPicUtiles;
 import zz.hjzn.hjwallet.weight.CircleImageView;
 
@@ -48,6 +64,7 @@ public class PersionCenterActivity extends BaseActivity {
     @BindView(R.id.ll_birth)
     LinearLayout llBirth;
     private PopupWindow popupWindow;
+    private File filepathHead;
 
     @Override
     protected void initView() {
@@ -78,8 +95,10 @@ public class PersionCenterActivity extends BaseActivity {
                 UploadPicUtiles.showDia(ctx);
                 break;
             case R.id.ll_nickname:
+                showPopuName(1,"修改昵称");
                 break;
             case R.id.ll_gender:
+                showPopuName(2,"修改姓名");
                 break;
             case R.id.ll_birth:
                 showPopu();
@@ -105,21 +124,102 @@ public class PersionCenterActivity extends BaseActivity {
                     UploadPicUtiles.startZoomPic((Activity) ctx, data, 150, 150, 1, 1);
                     break;
                 case 5:
-                    File filePath = UploadPicUtiles.getFilePath(data, ctx);
-                    wch(filePath + "");
-//                    UpHead(filePath);
-                    Glide.with(ctx).load(filePath).into(ivHead);
+                    filepathHead = UploadPicUtiles.getFilePath(data, ctx);
+                    wch(filepathHead + "");
+//                    Glide.with(ctx).load(filepathHead).into(ivHead);
+                    upHead();
                     break;
             }
         }
     }
 
+
+    private void showPopuName(final int Type,String title) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
+        View view = LayoutInflater.from(ctx).inflate(R.layout.dia_name, null);
+        builder.setView(view);
+        builder.setCancelable(false);
+        TextView tvTitle = view.findViewById(R.id.tv_title);
+        final EditText etName = view.findViewById(R.id.et_name);
+        Button btnClose = view.findViewById(R.id.btn_close);
+        Button btnAff = view.findViewById(R.id.btn_aff);
+        tvTitle.setText(title);
+        final AlertDialog show = builder.show();
+        final Map<String, String> map = new HashMap<>();
+        map.put(Parments.SessionId, sp.getString(SpUtiles.sessionId, ""));
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                show.dismiss();
+            }
+        });
+        btnAff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String name = etName.getText().toString().trim();
+                if (TextUtils.isEmpty(name)) {
+                    vibrator.vibrate(50);
+                    Toast.makeText(PersionCenterActivity.this, "输入内容不能为空", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                show.dismiss();
+             //1 昵称,姓名，生日
+                if (Type == 1) {
+                    map.put(Parments.nickName, name);
+                } else {
+                    map.put(Parments.realName,name);
+                }
+            mPreenter.fetch(map,false,NetUtils.ChangePersion,"");
+            }
+        });
+
+
+    }
+
+    @Override
+    public void showData(String s) throws IOException {
+        dissProgress();
+        PublicModel publicModel = gson.fromJson(s, PublicModel.class);
+        if (publicModel.isSuccess()) {
+            Toast.makeText(ctx, "更新成功", Toast.LENGTH_SHORT).show();
+        }else{
+
+            Toast.makeText(ctx, publicModel.getErrDesc(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void upHead() {
+        showProgress();
+        wch(sp.getString(SpUtiles.sessionId,""));
+        OkGo.<String>post(NetUtils.ChangePersion)
+                .params(Parments.SessionId, sp.getString(SpUtiles.sessionId, ""))
+//                .params(Parments.portraitImgUrl, filepathHead)
+                .upFile(filepathHead)
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        dissProgress();
+                        wch(response.body());
+                        PublicModel publicModel = gson.fromJson(response.body(), PublicModel.class);
+                        if (publicModel.isSuccess()) {
+                            Glide.with(ctx).load(filepathHead).into(ivHead);
+                            Toast.makeText(ctx, "修改成功", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(ctx, "修改失败", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    @Override
+                    public void onError(Response<String> response) {
+                        dissProgress();
+                        Toast.makeText(ctx, "网络连接失败", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
     private class ViewHolder implements View.OnClickListener {
         public View rootView;
         public TextView tv_close;
         public TextView tv_aff;
         public DatePicker dp_selete;
-
         public ViewHolder(View rootView) {
             this.rootView = rootView;
             this.tv_close = (TextView) rootView.findViewById(R.id.tv_close);
@@ -128,7 +228,6 @@ public class PersionCenterActivity extends BaseActivity {
             this.tv_aff.setOnClickListener(this);
             this.tv_close.setOnClickListener(this);
         }
-
         @SuppressLint("NewApi")
         @Override
         public void onClick(View v) {
@@ -140,11 +239,13 @@ public class PersionCenterActivity extends BaseActivity {
                     int year = dp_selete.getYear();
                     int month = dp_selete.getMonth();
                     int dayOfMonth = dp_selete.getDayOfMonth();
-                    wch(year+":"+(month+1)+":"+dayOfMonth);
+                    wch(year + ":" + (month + 1) + ":" + dayOfMonth);
                     popupWindow.dismiss();
                     break;
 
             }
         }
     }
+
+
 }

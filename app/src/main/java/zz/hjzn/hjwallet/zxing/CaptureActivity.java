@@ -1,39 +1,68 @@
 package zz.hjzn.hjwallet.zxing;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.hardware.Camera;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Vibrator;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.google.zxing.BarcodeFormat;
+import com.google.zxing.BinaryBitmap;
+import com.google.zxing.ChecksumException;
+import com.google.zxing.DecodeHintType;
+import com.google.zxing.FormatException;
+import com.google.zxing.NotFoundException;
+import com.google.zxing.RGBLuminanceSource;
 import com.google.zxing.Result;
+import com.google.zxing.common.HybridBinarizer;
+import com.google.zxing.qrcode.QRCodeReader;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
+import java.util.Hashtable;
 import java.util.Vector;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import zz.hjzn.hjwallet.BuildConfig;
 import zz.hjzn.hjwallet.R;
 import zz.hjzn.hjwallet.activitys.InPutAddressActivity;
 import zz.hjzn.hjwallet.base.BaseActivity;
 import zz.hjzn.hjwallet.base.Presenter;
 import zz.hjzn.hjwallet.utils.RegularUils;
+import zz.hjzn.hjwallet.utils.UploadPicUtiles;
 import zz.hjzn.hjwallet.zxing.camera.CameraManager;
 import zz.hjzn.hjwallet.zxing.decoding.CaptureActivityHandler;
 import zz.hjzn.hjwallet.zxing.decoding.InactivityTimer;
@@ -51,13 +80,15 @@ public class CaptureActivity extends BaseActivity implements Callback {
     @BindView(R.id.viewfinder_view)
     ViewfinderView viewfinderView;
     @BindView(R.id.imageView2)
-    ImageButton imageView2;
+    ImageView imageView2;
     @BindView(R.id.tv_title)
     TextView tvTitle;
     @BindView(R.id.tv_right)
     TextView tvRight;
     @BindView(R.id.tool_bar)
     Toolbar toolBar;
+    @BindView(R.id.btn_seletepic)
+    Button btn_seletepic;
     private CaptureActivityHandler handler;
 
     private boolean hasSurface;
@@ -76,7 +107,7 @@ public class CaptureActivity extends BaseActivity implements Callback {
     protected void initData() {
         tvTitle.setText(R.string.CaptureCodeTitle);
         tvRight.setText(R.string.NoShibie);
-        initTabBar(toolBar,false);
+        initTabBar(toolBar, false);
     }
 
     @Override
@@ -292,9 +323,100 @@ public class CaptureActivity extends BaseActivity implements Callback {
     };
 
 
+    @OnClick({R.id.btn_seletepic, R.id.tv_right})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.btn_seletepic:
+                UploadPicUtiles.openAlbum((Activity) ctx, BuildConfig.APPLICATION_ID);
+                break;
+            case R.id.tv_right:
+                startActivity(new Intent(ctx, InPutAddressActivity.class));
+                break;
+        }
+    }
 
-    @OnClick(R.id.tool_bar)
-    public void onViewClicked() {
-        startActivity(new Intent(ctx,InPutAddressActivity.class));
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 2 && data != null) {
+            File filePath1 = null;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                Uri uri = data.getData();
+                Glide.with(ctx).asFile().load(data.getData()).into(new SimpleTarget<File>() {
+                    @Override
+                    public void onResourceReady(@NonNull File resource, @Nullable Transition<? super File> transition) {
+                       scanningImage(resource.getPath());
+
+                    }
+                });
+            } else {
+                filePath1 = UploadPicUtiles.getFilePath1(data, ctx);
+                Glide.with(ctx).asFile().load(filePath1).into(new SimpleTarget<File>() {
+                    @Override
+                    public void onResourceReady(@NonNull File resource, @Nullable Transition<? super File> transition) {
+                       scanningImage(resource.getPath());
+                    }
+                });
+            }
+        }
+    }
+
+    private Bitmap scanBitmap;
+
+    protected void scanningImage(String path) {
+
+        // DecodeHintType 和EncodeHintType
+        Hashtable<DecodeHintType, String> hints = new Hashtable<DecodeHintType, String>();
+        hints.put(DecodeHintType.CHARACTER_SET, "utf-8"); // 设置二维码内容的编码
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true; // 先获取原大小
+        scanBitmap = BitmapFactory.decodeFile(path, options);
+        options.inJustDecodeBounds = false; // 获取新的大小
+
+        int sampleSize = (int) (options.outHeight / (float) 200);
+
+        if (sampleSize <= 0)
+            sampleSize = 1;
+        options.inSampleSize = sampleSize;
+        scanBitmap = BitmapFactory.decodeFile(path, options);
+        int width = scanBitmap.getWidth();
+        int height = scanBitmap.getHeight();
+        int[] data = new int[width * height];
+        scanBitmap.getPixels(data, 0, width, 0, 0, width, height);
+        RGBLuminanceSource source = new RGBLuminanceSource(width, height, data);
+        BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
+        new QrCodeAsyncTask().execute(bitmap);
+    }
+
+    class QrCodeAsyncTask extends AsyncTask<BinaryBitmap, Void, Result> {
+
+        @Override
+        protected Result doInBackground(BinaryBitmap... params) {
+            QRCodeReader reader = new QRCodeReader();
+            Result result = null;
+            try {
+                result = reader.decode(params[0]);
+            } catch (NotFoundException e) {
+                e.printStackTrace();
+            } catch (ChecksumException e) {
+                e.printStackTrace();
+            } catch (FormatException e) {
+                e.printStackTrace();
+            }
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(Result result) {
+            super.onPostExecute(result);
+
+
+            String resultString = result.getText();
+            Intent resultIntent = new Intent();
+            Bundle bundle = new Bundle();
+            bundle.putString("result", resultString);
+            resultIntent.putExtras(bundle);
+            CaptureActivity.this.setResult(RESULT_OK, resultIntent);
+            CaptureActivity.this.finish();
+        }
     }
 }

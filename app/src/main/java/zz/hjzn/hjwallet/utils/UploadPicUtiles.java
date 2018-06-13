@@ -16,6 +16,8 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
@@ -26,15 +28,21 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import zz.hjzn.hjwallet.BuildConfig;
+import zz.hjzn.hjwallet.MainActivity;
 import zz.hjzn.hjwallet.R;
 
 /**
@@ -465,20 +473,21 @@ public class UploadPicUtiles {
 
     public static File getFilePath1(Intent data, Context ctx) {
         File file = null;
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-
-            if (isCamera) {
-                file = new File(String.valueOf(uriForFile));
-            } else {
-                uriForFile = data.getData();
-                file = new File(String.valueOf(uriForFile));
-            }
-
-        } else {
-            String path = handleImageOnKitKat(data, ctx);
-            file = new File(path);
-        }
+        String path = handleImageOnKitKat(data, ctx);
+        file = new File(path);
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+//
+//            if (isCamera) {
+//                file = new File(String.valueOf(uriForFile));
+//            } else {
+//                Uri path = data.getData();
+//               LogUtils.LogI(path);
+//               file = new File(path.toString());
+//            }
+//
+//        } else {
+//
+//        }
         return file;
 
     }

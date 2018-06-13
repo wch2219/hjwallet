@@ -69,10 +69,7 @@ public class MyReceiver extends BroadcastReceiver {
         } catch (Exception e) {
             Log.i("wch", e.getMessage());
         }
-
     }
-
-
     //send msg to MainActivity
     private void processCustomMessage(Context context, Bundle bundle) {
         String message = bundle.getString(JPushInterface.EXTRA_MESSAGE);
@@ -89,7 +86,6 @@ public class MyReceiver extends BroadcastReceiver {
 //        } catch (JSONException e) {
 //            e.printStackTrace();
 //        }
-//
 //        Gson gson = new Gson();
 //        NotifitBean notifitBean = gson.fromJson(MyApplication.EXTRAS, NotifitBean.class);
 //        LogUtiles.LogI(extras.toString());

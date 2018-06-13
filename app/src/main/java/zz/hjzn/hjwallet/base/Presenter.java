@@ -19,7 +19,7 @@ public class Presenter<V>extends ViewPresenter {
         this.viewInterface = viewInterface;
     }
     //绑定view和mode
-    public void fetch(Map<String,Object> map, Boolean isget, String url, String cachKey){
+    public void fetch(Map<String,String> map, Boolean isget, String url, String cachKey){
         viewInterface.showProgress();
 
         if (mode != null) mode.loadData(new InternetInterface.LoadListener() {

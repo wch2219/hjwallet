@@ -64,4 +64,6 @@
     <string name="selfmotionexit">后自动退出</string>
     <string name="Success">成功</string>
     <string name="address">转账地址：</string>
+    <string name="realname">实名认证</string>
+    <string name="placeinputinfo">请输入内容</string>
 </resources>

@@ -48,11 +48,7 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        String string = sp.getString(SpUtiles.sessionId, "");
-        if (!TextUtils.isEmpty(string)) {
-            startActivity(new Intent(ctx,MainActivity.class));
-            finish();
-        }
+
     }
 
     @Override

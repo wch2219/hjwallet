@@ -58,7 +58,7 @@
 
                             android:text="李小胖"
                             android:textColor="@color/white"
-                            android:textIsSelectable="true" />
+                             />
 
                         <LinearLayout
                             android:layout_width="match_parent"

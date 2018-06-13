@@ -10,7 +10,6 @@
         <include
             layout="@layout/toobal_titleblue"
             />
-    
         <TextView
             style="@style/TextView15blue"
             android:layout_gravity="center_horizontal"
@@ -51,6 +50,7 @@
             android:lines="1"
             android:focusable="true"
             android:longClickable="true"
+            android:textIsSelectable="true"
             android:layout_gravity="center_horizontal"
             />
     </LinearLayout>

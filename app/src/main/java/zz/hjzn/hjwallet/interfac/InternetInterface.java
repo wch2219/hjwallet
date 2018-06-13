@@ -8,7 +8,7 @@ public interface InternetInterface {
     /**
      * 加载数据
      */
-    void loadData(LoadListener loadListener, Map<String, Object> map, boolean isget, String url, String cachKey);
+    void loadData(LoadListener loadListener, Map<String, String> map, boolean isget, String url, String cachKey);
 
     /**
      * 加载数据监听

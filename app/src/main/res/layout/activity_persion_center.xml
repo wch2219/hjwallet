@@ -33,7 +33,7 @@
                 android:id="@+id/iv_head"
                 android:layout_width="@dimen/demen_40dp"
                 android:layout_height="@dimen/demen_40dp"
-                android:src="@drawable/head"
+                android:src="@mipmap/icon_head"
                 />
             <ImageView
                 android:layout_width="@dimen/demen_15dp"
@@ -83,13 +83,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/demen_10dp"
+
         android:orientation="horizontal"
         >
         <TextView
             style="@style/TextView13black"
             android:layout_gravity="center_vertical"
             android:textColor="@color/black_text"
-            android:text="@string/gender"
+            android:text="@string/realname"
             android:layout_weight="1"
 
             />
