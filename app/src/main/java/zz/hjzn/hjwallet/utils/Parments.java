@@ -14,7 +14,7 @@ public class Parments {
     public static final String SessionId = "appSessionId";//会话Id
     public static final String outAddress = "outAddress";
     public static final String transferAmount = "transferAmount";//数量
-    public static final String portraitImgUrl = "portraitImgUrl";//头像
+    public static final String portraitImgUrl = "files";//头像
     public static final String nickName = "nickName";//昵称
     public static final String realName = "realName";//姓名
 }

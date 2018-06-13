@@ -54,7 +54,7 @@
     <string name="placeinputpaypwd">请输入6位交易密码</string>
     <string name="forgetPwd">忘记密码</string>
     <string name="CaptureCodeTitle">二维码识别</string>
-    <string name="NoShibie">识别不了？</string>
+    <string name="NoShibie">手动</string>
     <string name="placeinputaddresshint">请手动输入转账地址</string>
     <string name="next">下一步</string>
     <string name="inputAddressTitle">输入地址</string>

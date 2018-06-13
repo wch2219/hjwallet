@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.Progress;
 import com.lzy.okgo.model.Response;
 
 import java.io.File;
@@ -191,10 +192,10 @@ public class PersionCenterActivity extends BaseActivity {
     private void upHead() {
         showProgress();
         wch(sp.getString(SpUtiles.sessionId,""));
+        //"http://192.168.101.31/day11_1/BServlet"
         OkGo.<String>post(NetUtils.ChangePersion)
                 .params(Parments.SessionId, sp.getString(SpUtiles.sessionId, ""))
-//                .params(Parments.portraitImgUrl, filepathHead)
-                .upFile(filepathHead)
+                .params(Parments.portraitImgUrl, filepathHead)
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(Response<String> response) {
@@ -208,6 +209,12 @@ public class PersionCenterActivity extends BaseActivity {
                             Toast.makeText(ctx, "修改失败", Toast.LENGTH_SHORT).show();
                         }
                     }
+
+                    @Override
+                    public void uploadProgress(Progress progress) {
+                        wch(progress.currentSize);
+                    }
+
                     @Override
                     public void onError(Response<String> response) {
                         dissProgress();

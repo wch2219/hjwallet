@@ -4,8 +4,8 @@ package zz.hjzn.hjwallet.utils;
  * 接口
  */
 public class NetUtils {
-//    private static final String BaseUrl = "http://47.97.124.61:8080/gscApi/";
-    private static final String BaseUrl = "http://192.168.101.40:8081/gscApi/";
+    private static final String BaseUrl = "http://47.97.124.61:8080/gscApi/";
+//    private static final String BaseUrl = "http://192.168.101.40:8081/gscApi/";
 
     public static final String Login = BaseUrl+"d-app/API/userLogin";//登录
     public static final String GetAuth = BaseUrl + "d-app/API/getAuthCode";//获取验证码
