@@ -26,6 +26,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import zz.hjzn.hjwallet.MyApplication;
 import zz.hjzn.hjwallet.R;
+import zz.hjzn.hjwallet.activitys.AboutWeActivity;
 import zz.hjzn.hjwallet.activitys.BillDescActivity;
 import zz.hjzn.hjwallet.activitys.PersionCenterActivity;
 import zz.hjzn.hjwallet.activitys.SettActivity;
@@ -116,7 +117,7 @@ public class MyFragment extends BaseFragment implements AdapterView.OnItemClickL
                 startActivity(new Intent(ctx, BillDescActivity.class));
                 break;
             case 2://关于我们
-
+                startActivity(new Intent(ctx,AboutWeActivity.class));
                 break;
             case 3://版本检查
                 Beta.checkUpgrade();

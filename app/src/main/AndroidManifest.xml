@@ -203,7 +203,7 @@ package="zz.hjzn.hjwallet">
             android:resource="@xml/file_paths" />
     </provider>
 
-    <activity android:name=".MainActivity" >
+    <activity android:name=".MainActivity">
 
     </activity>
     <activity
@@ -232,8 +232,12 @@ package="zz.hjzn.hjwallet">
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
     </activity>
+    <activity android:name="zz.hjzn.hjwallet.activitys.AboutWeActivity"></activity>
 </application>
 
 </manifest>
+
+
+
 
 
