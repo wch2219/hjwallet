@@ -25,6 +25,7 @@ public class InterModelImpl implements InternetInterface {
             GetRequest<String> getRequest = OkGo.<String>get(url);
             if (TextUtils.isEmpty(cachKey)) {
                 getRequest.cacheMode(CacheMode.NO_CACHE);
+
             }else{
                 getRequest.cacheMode(CacheMode.REQUEST_FAILED_READ_CACHE)
                         .cacheKey(cachKey);
@@ -65,7 +66,8 @@ public class InterModelImpl implements InternetInterface {
 //                Object value = next.getValue();
 //                post.params(key, (String) value);
 //            }
-            post.params(map,false);
+            post.params(map,false)
+            .isMultipart(true);
             post.execute(new StringCallback() {
 
                 @Override

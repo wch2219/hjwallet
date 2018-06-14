@@ -2,11 +2,12 @@ package zz.hjzn.hjwallet.model;
 
 public class PersionInfoModel {
 
+
     /**
      * success : true
      * errCode : 10000
      * errDesc : 查询成功
-     * result : {"bookCode":"2","itemName":null,"itemType":0,"createTime":1526098716000,"freezBalance":0,"walletAddress":"XQtc3ALjnYAdV2z4edE6jZ9VLBKR6D4YR4","bookBalance":0,"userId":2711,"bookId":3610}
+     * result : {"portraitImgUrl":"http://47.97.124.61:8080/d-app/API/showImg/13107c29996744b4a95228c2511ab150.png","realName":"哈哈哈哈","bookCode":"2","itemName":null,"itemType":0,"createTime":1526098716000,"nickName":"记录","freezBalance":0,"walletAddress":"XQtc3ALjnYAdV2z4edE6jZ9VLBKR6D4YR4","bookBalance":8.2999,"userId":2711,"bookId":3610}
      */
 
     private boolean success;
@@ -48,26 +49,48 @@ public class PersionInfoModel {
 
     public static class ResultBean {
         /**
+         * portraitImgUrl : http://47.97.124.61:8080/d-app/API/showImg/13107c29996744b4a95228c2511ab150.png
+         * realName : 哈哈哈哈
          * bookCode : 2
          * itemName : null
          * itemType : 0
          * createTime : 1526098716000
+         * nickName : 记录
          * freezBalance : 0.0
          * walletAddress : XQtc3ALjnYAdV2z4edE6jZ9VLBKR6D4YR4
-         * bookBalance : 0.0
+         * bookBalance : 8.2999
          * userId : 2711
          * bookId : 3610
          */
 
+        private String portraitImgUrl;
+        private String realName;
         private String bookCode;
         private Object itemName;
         private int itemType;
         private long createTime;
+        private String nickName;
         private double freezBalance;
         private String walletAddress;
         private double bookBalance;
         private int userId;
         private int bookId;
+
+        public String getPortraitImgUrl() {
+            return portraitImgUrl;
+        }
+
+        public void setPortraitImgUrl(String portraitImgUrl) {
+            this.portraitImgUrl = portraitImgUrl;
+        }
+
+        public String getRealName() {
+            return realName;
+        }
+
+        public void setRealName(String realName) {
+            this.realName = realName;
+        }
 
         public String getBookCode() {
             return bookCode;
@@ -99,6 +122,14 @@ public class PersionInfoModel {
 
         public void setCreateTime(long createTime) {
             this.createTime = createTime;
+        }
+
+        public String getNickName() {
+            return nickName;
+        }
+
+        public void setNickName(String nickName) {
+            this.nickName = nickName;
         }
 
         public double getFreezBalance() {

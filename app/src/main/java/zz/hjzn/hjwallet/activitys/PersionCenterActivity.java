@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Progress;
@@ -29,9 +30,11 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import zz.hjzn.hjwallet.MyApplication;
 import zz.hjzn.hjwallet.R;
 import zz.hjzn.hjwallet.base.BaseActivity;
 import zz.hjzn.hjwallet.base.Presenter;
+import zz.hjzn.hjwallet.model.PersionInfoModel;
 import zz.hjzn.hjwallet.model.PublicModel;
 import zz.hjzn.hjwallet.utils.NetUtils;
 import zz.hjzn.hjwallet.utils.Parments;
@@ -66,7 +69,7 @@ public class PersionCenterActivity extends BaseActivity {
     LinearLayout llBirth;
     private PopupWindow popupWindow;
     private File filepathHead;
-
+    private int HttpType;//0  获取个人信息  1  修改
     @Override
     protected void initView() {
         setContentView(R.layout.activity_persion_center);
@@ -76,6 +79,15 @@ public class PersionCenterActivity extends BaseActivity {
     protected void initData() {
         tvTitle.setText(R.string.persion_info);
         initTabBar(toolBar, true);
+        getPerInfo();
+    }
+
+    private void getPerInfo() {
+        HttpType = 0;
+        String sessionId = sp.getString(SpUtiles.sessionId, "");//获取会话Id
+        Map<String, String> map = new HashMap<>();
+        map.put(Parments.SessionId, sessionId);
+        mPreenter.fetch(map, true, NetUtils.GetPersionInfo, NetUtils.GetPersionInfo + Parments.SessionId);
     }
 
     @Override
@@ -170,22 +182,36 @@ public class PersionCenterActivity extends BaseActivity {
                 } else {
                     map.put(Parments.realName,name);
                 }
+                HttpType = 1;
             mPreenter.fetch(map,false,NetUtils.ChangePersion,"");
             }
         });
-
 
     }
 
     @Override
     public void showData(String s) throws IOException {
         dissProgress();
-        PublicModel publicModel = gson.fromJson(s, PublicModel.class);
-        if (publicModel.isSuccess()) {
-            Toast.makeText(ctx, "更新成功", Toast.LENGTH_SHORT).show();
-        }else{
+        if (HttpType == 0) {
+            PersionInfoModel persionInfoModel = gson.fromJson(s, PersionInfoModel.class);
+            if (persionInfoModel.getErrCode() == RequestCode.SuccessCode) {
+                MyApplication.persionInfoModel = persionInfoModel;
+                PersionInfoModel.ResultBean result = persionInfoModel.getResult();
+                tvGender.setText(result.getRealName());
+                Glide.with(ctx).load(result.getPortraitImgUrl()).apply(new RequestOptions().error(R.mipmap.icon_head)).into(ivHead);
+                tvNickname.setText(result.getNickName());
+            } else {
+                Toast.makeText(ctx, persionInfoModel.getErrDesc(), Toast.LENGTH_SHORT).show();
+            }
+        }else {
+            PublicModel publicModel = gson.fromJson(s, PublicModel.class);
+            if (publicModel.isSuccess()) {
+                Toast.makeText(ctx, "更新成功", Toast.LENGTH_SHORT).show();
+                getPerInfo();
+            } else {
 
-            Toast.makeText(ctx, publicModel.getErrDesc(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ctx, publicModel.getErrDesc(), Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -205,6 +231,7 @@ public class PersionCenterActivity extends BaseActivity {
                         if (publicModel.isSuccess()) {
                             Glide.with(ctx).load(filepathHead).into(ivHead);
                             Toast.makeText(ctx, "修改成功", Toast.LENGTH_SHORT).show();
+                            getPerInfo();
                         }else{
                             Toast.makeText(ctx, "修改失败", Toast.LENGTH_SHORT).show();
                         }

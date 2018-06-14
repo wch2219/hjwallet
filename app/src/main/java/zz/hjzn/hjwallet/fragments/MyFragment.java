@@ -10,6 +10,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.tencent.bugly.Bugly;
@@ -134,7 +136,8 @@ public class MyFragment extends BaseFragment implements AdapterView.OnItemClickL
             MyApplication.persionInfoModel = persionInfoModel;
             PersionInfoModel.ResultBean result = persionInfoModel.getResult();
             tvGscnum.setText(String.valueOf(result.getBookBalance()));
-            tvNickname.setText(result.getWalletAddress());
+            tvNickname.setText(result.getNickName());
+            Glide.with(ctx).load(result.getPortraitImgUrl()).apply(new RequestOptions().error(R.mipmap.icon_head)).into(ivHead);
         } else {
             Toast.makeText(ctx, persionInfoModel.getErrDesc(), Toast.LENGTH_SHORT).show();
         }

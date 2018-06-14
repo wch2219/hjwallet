@@ -10,12 +10,19 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -62,10 +69,16 @@ public class MyReceiptCodeActivity extends BaseActivity {
         tvTitle.setText("我的收款码");
         tvRight.setText(R.string.receipt_history);
         initTabBar(toolBar, false);
-        String walletAddress = MyApplication.persionInfoModel.getResult().getWalletAddress();
-        bitmapcode = QRCode.createQRCodeWithLogo6(walletAddress,
-                500, drawableToBitmap(getResources().getDrawable(R.mipmap.logo)));
-        ivCode.setImageBitmap(bitmapcode);
+        final String walletAddress = MyApplication.persionInfoModel.getResult().getWalletAddress();
+        Glide.with(ctx).asBitmap().apply(new RequestOptions().error(R.mipmap.logo)).load(MyApplication.persionInfoModel.getResult().getPortraitImgUrl()).into(new SimpleTarget<Bitmap>() {
+            @Override
+            public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                bitmapcode = QRCode.createQRCodeWithLogo6(walletAddress,
+                        500, resource);
+                ivCode.setImageBitmap(bitmapcode);
+            }
+        });
+
         tv_address.setText(walletAddress);
     }
 
