@@ -70,15 +70,11 @@ public class MyReceiptCodeActivity extends BaseActivity {
         tvRight.setText(R.string.receipt_history);
         initTabBar(toolBar, false);
         final String walletAddress = MyApplication.persionInfoModel.getResult().getWalletAddress();
-        Glide.with(ctx).asBitmap().apply(new RequestOptions().error(R.mipmap.logo)).load(MyApplication.persionInfoModel.getResult().getPortraitImgUrl()).into(new SimpleTarget<Bitmap>() {
-            @Override
-            public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                bitmapcode = QRCode.createQRCodeWithLogo6(walletAddress,
-                        500, resource);
-                ivCode.setImageBitmap(bitmapcode);
-            }
-        });
+//        Glide.with(ctx).asBitmap().apply(new RequestOptions().error(R.mipmap.logo)).load(MyApplication.persionInfoModel.getResult().getPortraitImgUrl()).into(ivCode);
 
+        bitmapcode = QRCode.createQRCodeWithLogo6(walletAddress,
+                500, drawableToBitmap(getResources().getDrawable(R.mipmap.logo)));
+        ivCode.setImageBitmap(bitmapcode);
         tv_address.setText(walletAddress);
     }
 
@@ -104,8 +100,6 @@ public class MyReceiptCodeActivity extends BaseActivity {
 
         return bitmap;
     }
-
-
     @OnClick({R.id.tv_right, R.id.tv_savepic})
     public void onViewClicked(View view) {
         switch (view.getId()) {
