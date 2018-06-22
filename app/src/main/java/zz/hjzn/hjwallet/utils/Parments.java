@@ -17,4 +17,5 @@ public class Parments {
     public static final String portraitImgUrl = "files";//头像
     public static final String nickName = "nickName";//昵称
     public static final String realName = "realName";//姓名
+    public static final String walletAddress = "walletAddress";//钱包地址
 }

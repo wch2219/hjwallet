@@ -10,6 +10,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -21,6 +24,7 @@ import zz.hjzn.hjwallet.R;
 import zz.hjzn.hjwallet.base.BaseActivity;
 import zz.hjzn.hjwallet.base.Presenter;
 import zz.hjzn.hjwallet.lisenter.PayMentEditetxtListener;
+import zz.hjzn.hjwallet.model.PersionInfoModel;
 import zz.hjzn.hjwallet.model.PublicModel;
 import zz.hjzn.hjwallet.utils.IntentTag;
 import zz.hjzn.hjwallet.utils.NetUtils;
@@ -29,6 +33,7 @@ import zz.hjzn.hjwallet.utils.PayWindowUtils;
 import zz.hjzn.hjwallet.utils.RegularUils;
 import zz.hjzn.hjwallet.utils.RequestCode;
 import zz.hjzn.hjwallet.utils.SpUtiles;
+import zz.hjzn.hjwallet.weight.CircleImageView;
 
 /**
  * 付款
@@ -39,7 +44,7 @@ public class StartPaymentActivity extends BaseActivity {
     @BindView(R.id.tool_bar)
     Toolbar toolBar;
     @BindView(R.id.iv_head)
-    ImageView ivHead;
+    CircleImageView ivHead;
     @BindView(R.id.tv_name)
     TextView tvName;
     @BindView(R.id.tv_name1)
@@ -51,6 +56,7 @@ public class StartPaymentActivity extends BaseActivity {
     private String walltAddress;
     private int HttpType;//0  支付密码校验  1  转账
     private String num;
+    private PersionInfoModel persionInfoModel;
 
     @Override
     protected void initView() {
@@ -61,7 +67,30 @@ public class StartPaymentActivity extends BaseActivity {
     protected void initData() {
         tvTitle.setText(R.string.payment_title);
         initTabBar(toolBar, false);
-        walltAddress = getIntent().getStringExtra(IntentTag.ResultCode);
+        persionInfoModel = (PersionInfoModel) getIntent().getSerializableExtra(IntentTag.ResultCode);
+       walltAddress = getIntent().getStringExtra(IntentTag.walletAddress);
+        PersionInfoModel.ResultBean result = persionInfoModel.getResult();
+        if (!TextUtils.isEmpty(result.getRealName())) {
+           tvName.setText(result.getRealName());
+            if (result.getRealName().length() > 1) {
+
+                tvName1.setText("(*"+result.getRealName().substring(1)+")");
+            }else{
+                tvName1.setText("(*"+result.getRealName()+")");
+            }
+        }else if (!TextUtils.isEmpty(result.getNickName())) {
+            tvName.setText(result.getNickName());
+            if (result.getNickName().length() > 0) {
+                tvName1.setText("(*"+result.getNickName().substring(1)+")");
+            }else{
+                tvName1.setText("(*"+result.getNickName()+")");
+            }
+        }else{
+            tvName1.setText("(**)");
+            tvName.setText("(**)");
+        }
+        Glide.with(ctx).load(result.getPortraitImgUrl()).apply(new RequestOptions().error(R.mipmap.icon_head)).into(ivHead);
+
     }
 
     @Override

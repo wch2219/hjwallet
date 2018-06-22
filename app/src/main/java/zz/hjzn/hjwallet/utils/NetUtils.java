@@ -16,4 +16,5 @@ public class NetUtils {
     public static final String CheckPayPwd = BaseUrl + "d-app/API/book/confirmPaypassword";//校验支付密码
     public static final String BillDesc = BaseUrl + "d-app/API/book/getBookRecordList";
     public static final String ChangePersion = BaseUrl + "d-app/API/user/update";//更改个人信息
+    public static final String AddressGetUserInfo = BaseUrl + "d-app/API/book/getUserInfo";//根据地址获取个人信息
 }

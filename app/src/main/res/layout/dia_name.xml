@@ -15,8 +15,8 @@
             style="@style/haveing"
             android:layout_marginRight="@dimen/demen_10dp"
             android:layout_marginTop="@dimen/demen_10dp"
+            android:layout_marginLeft="@dimen/demen_10dp"
             />
-
         <EditText
             android:id="@+id/et_name"
             android:layout_width="match_parent"

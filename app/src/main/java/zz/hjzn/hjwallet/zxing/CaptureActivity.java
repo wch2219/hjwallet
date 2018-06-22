@@ -50,7 +50,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
+import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.Map;
 import java.util.Vector;
 
 import butterknife.BindView;
@@ -58,10 +60,17 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import zz.hjzn.hjwallet.BuildConfig;
 import zz.hjzn.hjwallet.R;
+import zz.hjzn.hjwallet.activitys.EntryOtherActivity;
 import zz.hjzn.hjwallet.activitys.InPutAddressActivity;
+import zz.hjzn.hjwallet.activitys.StartPaymentActivity;
 import zz.hjzn.hjwallet.base.BaseActivity;
 import zz.hjzn.hjwallet.base.Presenter;
+import zz.hjzn.hjwallet.model.PersionInfoModel;
+import zz.hjzn.hjwallet.utils.IntentTag;
+import zz.hjzn.hjwallet.utils.NetUtils;
+import zz.hjzn.hjwallet.utils.Parments;
 import zz.hjzn.hjwallet.utils.RegularUils;
+import zz.hjzn.hjwallet.utils.RequestCode;
 import zz.hjzn.hjwallet.utils.UploadPicUtiles;
 import zz.hjzn.hjwallet.zxing.camera.CameraManager;
 import zz.hjzn.hjwallet.zxing.decoding.CaptureActivityHandler;
@@ -102,6 +111,7 @@ public class CaptureActivity extends BaseActivity implements Callback {
     private Camera camera;
     private boolean isOpen = true;
     private Camera.Parameters parameters;
+    private String resultString;
 
     @Override
     protected void initData() {
@@ -206,7 +216,7 @@ public class CaptureActivity extends BaseActivity implements Callback {
     public void handleDecode(Result result, Bitmap barcode) {
         inactivityTimer.onActivity();
         playBeepSoundAndVibrate();
-        String resultString = result.getText();
+        resultString = result.getText();
         //FIXME
         if (resultString.equals("")) {
             Toast.makeText(CaptureActivity.this, "Scan failed!", Toast.LENGTH_SHORT).show();
@@ -218,14 +228,52 @@ public class CaptureActivity extends BaseActivity implements Callback {
 //                startActivity(intent);
 //            }else {
 //			System.out.println("Result:"+resultString);
-            Intent resultIntent = new Intent();
-            Bundle bundle = new Bundle();
-            bundle.putString("result", resultString);
-            resultIntent.putExtras(bundle);
-            this.setResult(RESULT_OK, resultIntent);
-            CaptureActivity.this.finish();
-//            }
+//            Intent resultIntent = new Intent();
+//            Bundle bundle = new Bundle();
+//            bundle.putString("result", resultString);
+//            resultIntent.putExtras(bundle);
+//            this.setResult(RESULT_OK, resultIntent);
+
+            if (!TextUtils.isEmpty(resultString) && resultString.length() == 34) {
+
+                getUserInfo(resultString);
+
+
+            } else {
+                Intent intent = new Intent(ctx, EntryOtherActivity.class);
+                intent.putExtra(IntentTag.ResultCode, resultString);
+                startActivity(intent);
+                CaptureActivity.this.finish();
+            }
         }
+    }
+
+    /**
+     * 获取用户信息
+     */
+    private void getUserInfo(String result) {
+        Map<String, String> map = new HashMap<>();
+        map.put(Parments.walletAddress, result);
+        mPreenter.fetch(map, true, NetUtils.AddressGetUserInfo, "");
+    }
+
+    @Override
+    public void showData(String s) throws IOException {
+        dissProgress();
+        wch(s);
+        PersionInfoModel persionInfoModel = gson.fromJson(s, PersionInfoModel.class);
+        if (persionInfoModel.getErrCode() == RequestCode.SuccessCode) {
+            Intent intent = new Intent(ctx, StartPaymentActivity.class);
+            intent.putExtra(IntentTag.ResultCode, persionInfoModel);
+            intent.putExtra(IntentTag.walletAddress, resultString);
+            startActivity(intent);
+        } else {
+            Intent intent = new Intent(ctx, EntryOtherActivity.class);
+            intent.putExtra(IntentTag.ResultCode, resultString);
+            startActivity(intent);
+            CaptureActivity.this.finish();
+        }
+
     }
 
     private void initCamera(SurfaceHolder surfaceHolder) {
@@ -344,7 +392,7 @@ public class CaptureActivity extends BaseActivity implements Callback {
                 Glide.with(ctx).asFile().load(data.getData()).into(new SimpleTarget<File>() {
                     @Override
                     public void onResourceReady(@NonNull File resource, @Nullable Transition<? super File> transition) {
-                       scanningImage(resource.getPath());
+                        scanningImage(resource.getPath());
 
                     }
                 });
@@ -353,7 +401,7 @@ public class CaptureActivity extends BaseActivity implements Callback {
                 Glide.with(ctx).asFile().load(filePath1).into(new SimpleTarget<File>() {
                     @Override
                     public void onResourceReady(@NonNull File resource, @Nullable Transition<? super File> transition) {
-                       scanningImage(resource.getPath());
+                        scanningImage(resource.getPath());
                     }
                 });
             }

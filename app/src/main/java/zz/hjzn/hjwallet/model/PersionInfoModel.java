@@ -1,6 +1,8 @@
 package zz.hjzn.hjwallet.model;
 
-public class PersionInfoModel {
+import java.io.Serializable;
+
+public class PersionInfoModel implements Serializable{
 
 
     /**
@@ -47,7 +49,7 @@ public class PersionInfoModel {
         this.result = result;
     }
 
-    public static class ResultBean {
+    public static class ResultBean implements Serializable{
         /**
          * portraitImgUrl : http://47.97.124.61:8080/d-app/API/showImg/13107c29996744b4a95228c2511ab150.png
          * realName : 哈哈哈哈

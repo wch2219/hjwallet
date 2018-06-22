@@ -63,7 +63,6 @@ public class MyReceiptCodeActivity extends BaseActivity {
     protected void initView() {
         setContentView(R.layout.activity_my_receipt_code);
     }
-
     @Override
     protected void initData() {
         tvTitle.setText("我的收款码");
