@@ -10,7 +10,7 @@
         layout="@layout/toobal_titleblack"
         />
         <TextView
-            style="@style/TextView13black"
+            style="@style/TextView14black"
             android:layout_gravity="center_horizontal"
             android:padding="@dimen/demen_10dp"
             android:id="@+id/tv_text"

@@ -67,4 +67,7 @@
     <string name="realname">实名认证</string>
     <string name="placeinputinfo">请输入内容</string>
     <string name="about_info"><![CDATA[\t\t盖世付是一款移动端轻钱包 App。旨在为用户提供一款安全放心、简单好用、功能强大的数字资产钱包应用。   \n\n\t【主要功能】\n\n  私钥自持，安全管理数字资产 \n- 私钥被加密后，安全存储在手机的沙盒文件系统里面。\n - 提供多种私钥备份策略，防丢防盗。   \n\n转帐收款，简单好用的轻钱包功能 - 轻钱包无需同步完整区块链数据，轻便快捷。 \n- 足够简单易用，用户熟悉的界面和交互方式。    \n GSC支付场景应用 \n- 线上线下GSC消费一键支付，安全快捷]]></string>
+    <string name="saoyisao">扫一扫</string>
+    <string name="fukuan">付款</string>
+    <string name="shoukuan">收款</string>
 </resources>

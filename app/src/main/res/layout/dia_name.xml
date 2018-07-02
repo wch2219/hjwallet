@@ -6,7 +6,7 @@
     android:background="@drawable/shape_name_bg"
     android:layout_height="match_parent">
     <TextView
-        style="@style/TextView15blue"
+        style="@style/TextView16blue"
         android:id="@+id/tv_title"
         android:padding="@dimen/demen_15dp"
         android:layout_gravity="center_horizontal"

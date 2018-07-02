@@ -19,24 +19,24 @@
     </style>
 
     <color name="havling">#e5e5e5</color>
-        <style name="TextView13black">
+        <style name="TextView14black">
             <item name="android:layout_width">wrap_content</item>
             <item name="android:layout_height">wrap_content</item>
             <item name="android:textColor">@color/black_text</item>
-            <item name="android:textSize">@dimen/text_dimens13</item>
+            <item name="android:textSize">@dimen/text_dimens14</item>
         </style>
 
-    <style name="TextView15black">
+    <style name="TextView16black">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/black_text</item>
-        <item name="android:textSize">@dimen/text_dimens15</item>
+        <item name="android:textSize">@dimen/text_dimens16</item>
     </style>
-      <style name="TextView15blue">
+      <style name="TextView16blue">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/colorPrimary</item>
-        <item name="android:textSize">@dimen/text_dimens15</item>
+        <item name="android:textSize">@dimen/text_dimens16</item>
     </style>
     <style name="ButtonBluematch">
         <item name="android:layout_width">match_parent</item>

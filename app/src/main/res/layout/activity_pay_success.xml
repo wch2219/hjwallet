@@ -23,17 +23,17 @@
         android:orientation="horizontal"
         >
         <TextView
-            style="@style/TextView13black"
+            style="@style/TextView14black"
             android:text="@string/paySuccess"
             android:layout_gravity="center_horizontal"
             />
             <TextView
                 android:id="@+id/tv_time"
-                style="@style/TextView13black"
+                style="@style/TextView14black"
                 android:textColor="@color/colorPrimary"
                 />
             <TextView
-                style="@style/TextView13black"
+                style="@style/TextView14black"
                 android:text="@string/selfmotionexit"
                  />
     </LinearLayout>

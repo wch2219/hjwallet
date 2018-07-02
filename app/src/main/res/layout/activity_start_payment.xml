@@ -24,28 +24,28 @@
         android:layout_gravity="center_horizontal"
         >
         <TextView
-            style="@style/TextView15black"
+            style="@style/TextView16black"
             android:text="@string/payment_hint"
             android:layout_gravity="center_horizontal"
             />
         <TextView
             android:id="@+id/tv_name"
             android:text="小小"
-            style="@style/TextView15blue"
+            style="@style/TextView16blue"
             android:layout_gravity="center_horizontal"
             />
         <TextView
             android:id="@+id/tv_name1"
             android:text="(*小)"
             android:layout_marginLeft="@dimen/demen_5dp"
-            style="@style/TextView15black"
+            style="@style/TextView16black"
             android:layout_gravity="center_horizontal"
             />
 
     </LinearLayout>
 
         <TextView
-            style="@style/TextView15black"
+            style="@style/TextView16black"
             android:text="@string/payment_money"
             android:layout_marginLeft="@dimen/demen_10dp"
             android:layout_marginTop="@dimen/demen_20dp"
@@ -57,7 +57,7 @@
         >
 
         <TextView
-            style="@style/TextView15blue"
+            style="@style/TextView16blue"
             android:text="@string/Gsc"
             />
             <EditText

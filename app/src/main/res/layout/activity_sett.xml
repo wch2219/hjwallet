@@ -23,7 +23,7 @@
                 android:orientation="horizontal"
                 >
                 <TextView
-                    style="@style/TextView13black"
+                    style="@style/TextView14black"
                     android:layout_gravity="center_vertical"
                     android:textColor="@color/black_text"
                     android:text="@string/changepwd"
@@ -57,7 +57,7 @@
                     android:orientation="horizontal"
                     >
                     <TextView
-                        style="@style/TextView13black"
+                        style="@style/TextView14black"
                         android:layout_gravity="center_vertical"
                         android:textColor="@color/black_text"
                         android:text="@string/changepaypwd"
@@ -86,7 +86,7 @@
                         android:orientation="horizontal"
                         >
                         <TextView
-                            style="@style/TextView13black"
+                            style="@style/TextView14black"
                             android:layout_gravity="center_vertical"
                             android:textColor="@color/black_text"
                             android:text="@string/opengesture"

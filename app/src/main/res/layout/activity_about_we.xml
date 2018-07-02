@@ -10,7 +10,7 @@
         layout="@layout/toobal_titleblack"
         />
         <TextView
-            style="@style/TextView13black"
+            style="@style/TextView14black"
             android:padding="@dimen/demen_10dp"
             android:text="@string/about_info"
             />
@@ -21,11 +21,11 @@
         android:orientation="horizontal"
         android:layout_height="wrap_content">
         <TextView
-            style="@style/TextView13black"
+            style="@style/TextView14black"
             android:text="客服热线："
             />
         <TextView
-            style="@style/TextView13black"
+            style="@style/TextView14black"
             android:text="400-112-0258"
             android:lineSpacingMultiplier="1.2"
             android:id="@+id/tv_phone"

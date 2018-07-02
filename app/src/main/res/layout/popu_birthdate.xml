@@ -19,13 +19,13 @@
         >
         <TextView
             android:id="@+id/tv_close"
-            style="@style/TextView15blue"
+            style="@style/TextView16blue"
             android:text="@string/close"
             android:padding="@dimen/demen_10dp"
             />
         <TextView
             android:id="@+id/tv_aff"
-            style="@style/TextView15blue"
+            style="@style/TextView16blue"
             android:text="@string/aff"
             android:layout_alignParentRight="true"
             android:padding="@dimen/demen_10dp"

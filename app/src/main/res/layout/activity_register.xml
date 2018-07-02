@@ -203,7 +203,7 @@
         android:layout_marginRight="@dimen/demen_10dp"
         />
         <TextView
-            style="@style/TextView13black"
+            style="@style/TextView14black"
             android:padding="@dimen/demen_10dp"
             android:textColor="@color/gary_text"
             android:text="@string/registerhint"

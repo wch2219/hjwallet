@@ -94,7 +94,7 @@
         >
         <TextView
             android:id="@+id/tv_register"
-            style="@style/TextView13black"
+            style="@style/TextView14black"
             android:padding="@dimen/demen_10dp"
             android:layout_alignParentRight="true"
             android:text="@string/clickregister"
@@ -102,7 +102,7 @@
             />
             <TextView
                 android:id="@+id/tv_forgetpwd"
-            style="@style/TextView13black"
+            style="@style/TextView14black"
             android:padding="@dimen/demen_10dp"
             android:text="@string/forgetpwd"
                 android:textColor="@color/gary_text"

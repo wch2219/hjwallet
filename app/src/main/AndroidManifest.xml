@@ -233,11 +233,8 @@ package="zz.hjzn.hjwallet">
         </intent-filter>
     </activity>
     <activity android:name="zz.hjzn.hjwallet.activitys.AboutWeActivity"></activity>
+    <activity android:name="zz.hjzn.hjwallet.activitys.ShopActivity"></activity>
 </application>
 
 </manifest>
-
-
-
-
 
