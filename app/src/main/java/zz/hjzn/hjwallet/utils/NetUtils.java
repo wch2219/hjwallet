@@ -17,4 +17,13 @@ public class NetUtils {
     public static final String BillDesc = BaseUrl + "d-app/API/book/getBookRecordList";
     public static final String ChangePersion = BaseUrl + "d-app/API/user/update";//更改个人信息
     public static final String AddressGetUserInfo = BaseUrl + "d-app/API/book/getUserInfo";//根据地址获取个人信息
+//    中创云合
+    public static final String zhongchuangGetInfo = BaseUrl + "d-app/API/user/getUserExt";//获取持有币
+    public static final String BiPrice = "http://www.btcb9.com/getDateByID.htm?scid=35";//币价格
+    public static final String ZhongchuangRollout = BaseUrl + "/d-app/API/user/rollout";
+    public static final String Parities = "http://op.juhe.cn/onebox/exchange/query?key=fd1bc25f9419c77876936995fd020952";//汇率兑换
+    public static final String H5Video = "http://v.juhe.cn/wepiao/go?key=40c238959364045af29805645ab80ef5";//猫眼电影
+    public static final String News = "http://v.juhe.cn/toutiao/index";//新闻头条
+    public static final String Xiaohua = "http://v.juhe.cn/joke/content/list.php";//笑话
+    public static String StartLuck = "http://web.juhe.cn:8080/constellation/getAll";//十二星座
 }

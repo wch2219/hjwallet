@@ -69,27 +69,30 @@ public class StartPaymentActivity extends BaseActivity {
         initTabBar(toolBar, false);
         persionInfoModel = (PersionInfoModel) getIntent().getSerializableExtra(IntentTag.ResultCode);
        walltAddress = getIntent().getStringExtra(IntentTag.walletAddress);
-        PersionInfoModel.ResultBean result = persionInfoModel.getResult();
-        if (!TextUtils.isEmpty(result.getRealName())) {
-           tvName.setText(result.getRealName());
-            if (result.getRealName().length() > 1) {
+        if (persionInfoModel != null) {
+            PersionInfoModel.ResultBean result = persionInfoModel.getResult();
+            if (!TextUtils.isEmpty(result.getRealName())) {
+                tvName.setText(result.getRealName());
+                if (result.getRealName().length() > 1) {
 
-                tvName1.setText("(*"+result.getRealName().substring(1)+")");
+                    tvName1.setText("(*"+result.getRealName().substring(1)+")");
+                }else{
+                    tvName1.setText("(*"+result.getRealName()+")");
+                }
+            }else if (!TextUtils.isEmpty(result.getNickName())) {
+                tvName.setText(result.getNickName());
+                if (result.getNickName().length() > 0) {
+                    tvName1.setText("(*"+result.getNickName().substring(1)+")");
+                }else{
+                    tvName1.setText("(*"+result.getNickName()+")");
+                }
             }else{
-                tvName1.setText("(*"+result.getRealName()+")");
+                tvName1.setText("(**)");
+                tvName.setText("(**)");
             }
-        }else if (!TextUtils.isEmpty(result.getNickName())) {
-            tvName.setText(result.getNickName());
-            if (result.getNickName().length() > 0) {
-                tvName1.setText("(*"+result.getNickName().substring(1)+")");
-            }else{
-                tvName1.setText("(*"+result.getNickName()+")");
-            }
-        }else{
-            tvName1.setText("(**)");
-            tvName.setText("(**)");
+            Glide.with(ctx).load(result.getPortraitImgUrl()).apply(new RequestOptions().error(R.mipmap.icon_head)).into(ivHead);
+
         }
-        Glide.with(ctx).load(result.getPortraitImgUrl()).apply(new RequestOptions().error(R.mipmap.icon_head)).into(ivHead);
 
     }
 

@@ -22,7 +22,7 @@ public class MyProgressLoading extends Dialog {
         lp.width = 300; // 宽度
         lp.height = 300; // 高度
         lp.alpha = 1.0f; // 透明度
-
+        setCancelable(false);
         dialogWindow.setAttributes(lp);
         setCanceledOnTouchOutside(false);
     }

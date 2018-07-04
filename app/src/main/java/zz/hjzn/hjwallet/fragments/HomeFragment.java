@@ -10,28 +10,40 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import zz.hjzn.hjwallet.NewsActivity;
 import zz.hjzn.hjwallet.R;
 import zz.hjzn.hjwallet.activitys.EntryOtherActivity;
 import zz.hjzn.hjwallet.activitys.MyReceiptCodeActivity;
+import zz.hjzn.hjwallet.activitys.ParitiesActivity;
 import zz.hjzn.hjwallet.activitys.ShopActivity;
+import zz.hjzn.hjwallet.activitys.StartActivity;
 import zz.hjzn.hjwallet.activitys.StartPaymentActivity;
+import zz.hjzn.hjwallet.activitys.WebActivity;
+import zz.hjzn.hjwallet.activitys.XiaohuaActivity;
 import zz.hjzn.hjwallet.adapter.LifeAdapter;
 import zz.hjzn.hjwallet.base.BaseFragment;
 import zz.hjzn.hjwallet.base.BaseRecrviewAdapter;
 import zz.hjzn.hjwallet.base.Presenter;
+import zz.hjzn.hjwallet.utils.Amap.AmapUtils;
 import zz.hjzn.hjwallet.utils.IntentTag;
+import zz.hjzn.hjwallet.utils.NetUtils;
+import zz.hjzn.hjwallet.utils.SpUtiles;
 import zz.hjzn.hjwallet.zxing.CaptureActivity;
 
 /**
  * 首页
  */
-public class HomeFragment extends BaseFragment implements BaseRecrviewAdapter.OnItemClickListener{
+public class HomeFragment extends BaseFragment implements BaseRecrviewAdapter.OnItemClickListener {
 
 
     @BindView(R.id.ll_saoma)
@@ -42,7 +54,12 @@ public class HomeFragment extends BaseFragment implements BaseRecrviewAdapter.On
     LinearLayout llShoukuan;
     @BindView(R.id.rv_list)
     RecyclerView rvList;
-    Unbinder unbinder;
+    @BindView(R.id.rl_xiaohua)
+    RelativeLayout rl_xiaohua;
+    @BindView(R.id.iv_xingzuo)
+    ImageView ivXingzuo;
+    @BindView(R.id.tv_address)
+    TextView tv_address;
 
     @Override
     public int getLayoutID() {
@@ -51,7 +68,7 @@ public class HomeFragment extends BaseFragment implements BaseRecrviewAdapter.On
 
     @Override
     protected void initView() {
-        GridLayoutManager manager = new GridLayoutManager(ctx,4);
+        GridLayoutManager manager = new GridLayoutManager(ctx, 4);
         rvList.setLayoutManager(manager);
         LifeAdapter lifeAdapter = new LifeAdapter(ctx);
         lifeAdapter.setOnItemClickListener(this);
@@ -60,7 +77,13 @@ public class HomeFragment extends BaseFragment implements BaseRecrviewAdapter.On
 
     @Override
     protected void initData() {
-
+        AmapUtils.initialization(ctx);
+        AmapUtils.setLocationListener(new AmapUtils.LocationListener() {
+            @Override
+            public void getResultAdd(String city, double latitude, double longitude) {
+                tv_address.setText(city);
+            }
+        });
     }
 
     @Override
@@ -70,18 +93,34 @@ public class HomeFragment extends BaseFragment implements BaseRecrviewAdapter.On
 
     @Override
     public void setOnClick(int position) {
-        switch (position){
-                    case 3://商城
-                        startActivity(new Intent(ctx,ShopActivity.class));
-                        break;
+        switch (position) {
+            case 0://手机充值
+                startActivity(new Intent(ctx, WebActivity.class).putExtra("url", NetUtils.H5Video));
+                break;
+            case 1://新闻头条
+                startActivity(new Intent(ctx, NewsActivity.class));
+                break;
+            case 2://汇率
+                startActivity(new Intent(ctx, ParitiesActivity.class));
+                break;
+            case 3://商城
+                String string = sp.getString(SpUtiles.LoginSource, "");
+                if ("zhongchuangyunhe".equals(string)) {
+                    startActivity(new Intent(ctx, ShopActivity.class));
+                }else{
+                    Toast.makeText(ctx, "暂未开放", Toast.LENGTH_SHORT).show();
                 }
+                break;
+            default:
+                Toast.makeText(ctx, "暂未开放", Toast.LENGTH_SHORT).show();
+                break;
+        }
     }
 
     @Override
     protected Presenter createPresenter() {
         return new Presenter(this);
     }
-
 
 
     @Override
@@ -104,7 +143,7 @@ public class HomeFragment extends BaseFragment implements BaseRecrviewAdapter.On
         }
     }
 
-    @OnClick({R.id.ll_saoma, R.id.ll_fukuan, R.id.ll_shoukuan})
+    @OnClick({R.id.ll_saoma, R.id.ll_fukuan, R.id.ll_shoukuan, R.id.rl_xiaohua, R.id.iv_xingzuo})
     public void onViewClicked(View view) {
         Intent intent;
         switch (view.getId()) {
@@ -116,6 +155,12 @@ public class HomeFragment extends BaseFragment implements BaseRecrviewAdapter.On
                 break;
             case R.id.ll_shoukuan:
                 startActivity(new Intent(ctx, MyReceiptCodeActivity.class));
+                break;
+            case R.id.rl_xiaohua:
+                startActivity(new Intent(ctx, XiaohuaActivity.class));
+                break;
+            case R.id.iv_xingzuo:
+                startActivity(new Intent(ctx, StartActivity.class));
                 break;
         }
     }

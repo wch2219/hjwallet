@@ -70,4 +70,5 @@
     <string name="saoyisao">扫一扫</string>
     <string name="fukuan">付款</string>
     <string name="shoukuan">收款</string>
+    <string name="biprice">币\t\t价：</string>
 </resources>

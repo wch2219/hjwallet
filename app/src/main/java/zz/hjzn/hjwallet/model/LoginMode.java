@@ -2,11 +2,12 @@ package zz.hjzn.hjwallet.model;
 
 public class LoginMode {
 
+
     /**
      * success : true
      * errCode : 10000
      * errDesc : 成功
-     * result : {"bindMobile":"18637051978","sessionId":"DA312CB837174FEE080614C9F47B39B4.GBT_APP","secret":"0a97970fe90e69093792baad7140f3a6","email":null}
+     * result : {"bindMobile":null,"sessionId":"E967B78F76CB96B91F54187B66B4D8B4.GBT_APP","secret":"173638366e84122aaf822f4253610aee","regType":3,"email":null,"loginSource":"zhongchuangyunhe"}
      */
 
     private boolean success;
@@ -48,22 +49,26 @@ public class LoginMode {
 
     public static class ResultBean {
         /**
-         * bindMobile : 18637051978
-         * sessionId : DA312CB837174FEE080614C9F47B39B4.GBT_APP
-         * secret : 0a97970fe90e69093792baad7140f3a6
+         * bindMobile : null
+         * sessionId : E967B78F76CB96B91F54187B66B4D8B4.GBT_APP
+         * secret : 173638366e84122aaf822f4253610aee
+         * regType : 3
          * email : null
+         * loginSource : zhongchuangyunhe
          */
 
-        private String bindMobile;
+        private Object bindMobile;
         private String sessionId;
         private String secret;
+        private int regType;
         private Object email;
+        private String loginSource;
 
-        public String getBindMobile() {
+        public Object getBindMobile() {
             return bindMobile;
         }
 
-        public void setBindMobile(String bindMobile) {
+        public void setBindMobile(Object bindMobile) {
             this.bindMobile = bindMobile;
         }
 
@@ -83,12 +88,28 @@ public class LoginMode {
             this.secret = secret;
         }
 
+        public int getRegType() {
+            return regType;
+        }
+
+        public void setRegType(int regType) {
+            this.regType = regType;
+        }
+
         public Object getEmail() {
             return email;
         }
 
         public void setEmail(Object email) {
             this.email = email;
+        }
+
+        public String getLoginSource() {
+            return loginSource;
+        }
+
+        public void setLoginSource(String loginSource) {
+            this.loginSource = loginSource;
         }
     }
 }

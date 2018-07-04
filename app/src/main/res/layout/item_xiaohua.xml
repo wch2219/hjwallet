@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent">
+    <TextView
+        style="@style/TextView14black"
+        android:id="@+id/tv_date"
+        android:padding="@dimen/demen_10dp"
+        android:textColor="@color/gary_text"
+        android:textSize="@dimen/text_dimens12"
+        />
+        <View
+            style="@style/haveing"
+            />
+    <TextView
+        style="@style/TextView14black"
+        android:padding="@dimen/demen_10dp"
+        android:lineSpacingMultiplier="1.2"
+        android:id="@+id/tv_content"
+        />
+
+</LinearLayout>

@@ -72,10 +72,10 @@ public class LoginActivity extends BaseActivity {
                 break;
             case R.id.btn_aff://登录
                 String phone = etPhone.getText().toString().trim();
-                if (TextUtils.isEmpty(phone) && RegularUils.isMobileExact(phone)) {
-                    Toast.makeText(ctx, "请输入正确的手机号", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+//                if (TextUtils.isEmpty(phone) && RegularUils.isMobileExact(phone)) {
+//                    Toast.makeText(ctx, "请输入正确的手机号", Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
                 String pwd = etPwd.getText().toString().trim();
                 if (TextUtils.isEmpty(pwd)) {
                     Toast.makeText(ctx, "密码不能为空", Toast.LENGTH_SHORT).show();
@@ -96,6 +96,8 @@ public class LoginActivity extends BaseActivity {
         if (loginMode.getErrCode() == RequestCode.SuccessCode) {
             LoginMode.ResultBean result = loginMode.getResult();
             sp.edit().putString(SpUtiles.sessionId, result.getSessionId()).commit();
+            sp.edit().putString(SpUtiles.Account,etPhone.getText().toString().trim()).commit();
+            sp.edit().putString(SpUtiles.LoginSource,result.getLoginSource()).commit();
             wch(result.getSessionId());
             startActivity(new Intent(ctx, MainActivity.class));
             finish();

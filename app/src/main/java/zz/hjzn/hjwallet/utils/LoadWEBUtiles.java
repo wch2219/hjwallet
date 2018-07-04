@@ -29,7 +29,7 @@ public class LoadWEBUtiles {
         super();
         this.ctx = ctx;
         this.webParentView = webParentView;
-        initErrorPage();
+//        initErrorPage();
     }
     /**
      * 用来控制字体大小
@@ -42,7 +42,7 @@ public class LoadWEBUtiles {
         }
         Log.i("wch",url);
 //        //执行JavaScript脚本
-//        webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setJavaScriptEnabled(true);
         //得到一个WebView的设置对象,
         WebSettings setting = webView.getSettings();
         //setJavaScriptEnabled:使webView可以支持JavaScript
@@ -55,6 +55,7 @@ public class LoadWEBUtiles {
         setting.setLoadWithOverviewMode(true);
         webView.loadUrl(url);
         webView.setSaveEnabled(false);
+        setting.setDomStorageEnabled(true);
         webView.addJavascriptInterface(new JSInterface(),"window");
         webView.setWebViewClient(new WebViewClient() {
             @Override

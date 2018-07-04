@@ -20,7 +20,7 @@ android {
         applicationId "zz.hjzn.hjwallet"
         minSdkVersion 15
         targetSdkVersion 27
-        versionCode 3
+        versionCode 4
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         ndk {
@@ -97,4 +97,5 @@ dependencies {
 //其中latest.release指代最新版本号，也可以指定明确的版本号，例如1.2.0
     compile 'com.tencent.bugly:nativecrashreport:latest.release'
     //其中latest.release指代最新版本号，也可以指定明确的版本号，例如2.2.0
+    compile 'com.amap.api:location:latest.integration'
 }

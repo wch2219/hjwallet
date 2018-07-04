@@ -30,13 +30,13 @@
             />
         <TextView
             android:id="@+id/tv_name"
-            android:text="小小"
+            android:text=""
             style="@style/TextView16blue"
             android:layout_gravity="center_horizontal"
             />
         <TextView
             android:id="@+id/tv_name1"
-            android:text="(*小)"
+            android:text="()"
             android:layout_marginLeft="@dimen/demen_5dp"
             style="@style/TextView16black"
             android:layout_gravity="center_horizontal"
