@@ -89,13 +89,10 @@ public class ParitiesActivity extends BaseActivity {
             }
         });
     }
-
     @Override
     protected Presenter createPresenter() {
         return new Presenter(this);
     }
-
-
     @OnClick(R.id.ll_other)
     public void onViewClicked() {
         Intent intent = new Intent(ctx, ParitiesListAcitivity.class);

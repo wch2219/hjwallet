@@ -95,7 +95,7 @@ public class ParitiesListAcitivity extends BaseActivity {
                 vh = (ViewHolder) convertView.getTag();
             }
             List<List<String>> list = paritiesMode.getResult().getList();
-            vh.iv_pic.setImageResource(pics[position]);
+//            vh.iv_pic.setImageResource(pics[position]);
             vh.tv_name.setText(list.get(position).get(0));
             return convertView;
         }

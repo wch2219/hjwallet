@@ -51,7 +51,7 @@
             >
             <TextView
                 style="@style/TextView14black"
-                android:text="盖世付"
+                android:text="DOTO"
                 />
             <TextView
                 android:id="@+id/tv_num"

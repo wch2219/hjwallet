@@ -15,6 +15,7 @@
             android:padding="@dimen/demen_10dp"
             android:id="@+id/tv_text"
             android:enabled="true"
+            android:textIsSelectable="true"
             android:focusable="true"
             android:longClickable="true"
             />

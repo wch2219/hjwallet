@@ -10,10 +10,13 @@ import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.jpush.android.api.JPushInterface;
 import zz.hjzn.hjwallet.MainActivity;
 import zz.hjzn.hjwallet.R;
 import zz.hjzn.hjwallet.base.BaseActivity;
@@ -99,6 +102,9 @@ public class LoginActivity extends BaseActivity {
             sp.edit().putString(SpUtiles.Account,etPhone.getText().toString().trim()).commit();
             sp.edit().putString(SpUtiles.LoginSource,result.getLoginSource()).commit();
             wch(result.getSessionId());
+            Set<String> tags = new HashSet<>();
+            tags.add(etPhone.getText().toString().trim());
+            JPushInterface.setTags(getApplicationContext(), 1, tags);
             startActivity(new Intent(ctx, MainActivity.class));
             finish();
         } else {

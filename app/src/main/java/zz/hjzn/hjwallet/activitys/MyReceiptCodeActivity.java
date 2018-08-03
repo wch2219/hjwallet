@@ -130,6 +130,7 @@ public class MyReceiptCodeActivity extends BaseActivity {
             file.delete();
         }
         FileOutputStream out;
+
         try{
             out = new FileOutputStream(file);
             // 格式为 JPEG，照相机拍出的图片为JPEG格式的，PNG格式的不能显示在相册中

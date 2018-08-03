@@ -89,10 +89,10 @@ package="zz.hjzn.hjwallet">
     </service>
 
     <!-- since 3.1.0 Required SDK 核心功能 -->
-    <provider
-        android:name="cn.jpush.android.service.DownloadProvider"
-        android:authorities="zz.hjzn.hjwallet.DownloadProvider"
-        android:exported="true" />
+    <!--<provider-->
+        <!--android:name="cn.jpush.android.service.DownloadProvider"-->
+        <!--android:authorities="zz.hjzn.hjwallet.DownloadProvider"-->
+        <!--android:exported="true" />-->
 
     <!-- Required SDK核心功能 -->
     <receiver
@@ -218,35 +218,79 @@ package="zz.hjzn.hjwallet">
         android:name=".zxing.CaptureActivity"
         android:screenOrientation="portrait" />
 
-    <activity android:name=".activitys.MyReceiptCodeActivity" />
-    <activity android:name=".activitys.SetLockScreenPwdActivity" />
-    <activity android:name=".activitys.StartPaymentActivity" />
-    <activity android:name=".activitys.PersionCenterActivity" />
-    <activity android:name=".activitys.SettActivity" />
-    <activity android:name=".activitys.LoginActivity">
+    <activity android:name=".activitys.MyReceiptCodeActivity"
+        android:screenOrientation="portrait"
+        />
+    <activity android:name=".activitys.SetLockScreenPwdActivity"
+        android:screenOrientation="portrait"
+        />
+    <activity android:name=".activitys.StartPaymentActivity"
+        android:screenOrientation="portrait"
+        />
+    <activity android:name=".activitys.PersionCenterActivity"
+        android:screenOrientation="portrait"
+        />
+    <activity android:name=".activitys.SettActivity"
+        android:screenOrientation="portrait"
+        />
+    <activity android:name=".activitys.LoginActivity"
+        android:screenOrientation="portrait"
+        >
 
     </activity>
-    <activity android:name=".activitys.RegisterActivity" />
-    <activity android:name=".activitys.ForgetPwdActivity" />
-    <activity android:name=".activitys.BillDescActivity" />
-    <activity android:name=".activitys.InPutAddressActivity" />
-    <activity android:name=".activitys.EntryOtherActivity" />
-    <activity android:name=".activitys.ChangePayPwdActivity" />
-    <activity android:name=".activitys.PaySuccessActivity"></activity>
-    <activity android:name="zz.hjzn.hjwallet.activitys.LunchActivity">
+    <activity android:name=".activitys.RegisterActivity"
+        android:screenOrientation="portrait"
+        />
+    <activity android:name=".activitys.ForgetPwdActivity"
+        android:screenOrientation="portrait"
+        />
+    <activity android:name=".activitys.BillDescActivity"
+        android:screenOrientation="portrait"
+        />
+    <activity android:name=".activitys.InPutAddressActivity"
+        android:screenOrientation="portrait"
+        />
+    <activity android:name=".activitys.EntryOtherActivity"
+        android:screenOrientation="portrait"
+        />
+    <activity android:name=".activitys.ChangePayPwdActivity"
+        android:screenOrientation="portrait"
+        />
+    <activity android:name=".activitys.PaySuccessActivity"
+        android:screenOrientation="portrait"
+        ></activity>
+    <activity android:name="zz.hjzn.hjwallet.activitys.LunchActivity"
+        android:screenOrientation="portrait"
+        >
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
 
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
     </activity>
-    <activity android:name="zz.hjzn.hjwallet.activitys.AboutWeActivity"></activity>
-    <activity android:name="zz.hjzn.hjwallet.activitys.ShopActivity"></activity>
-    <activity android:name="zz.hjzn.hjwallet.activitys.ParitiesActivity"></activity>
-    <activity android:name="zz.hjzn.hjwallet.activitys.ParitiesListAcitivity"></activity>
-    <activity android:name="zz.hjzn.hjwallet.activitys.WebActivity"></activity>
-    <activity android:name="zz.hjzn.hjwallet.NewsActivity"></activity>
-    <activity android:name="zz.hjzn.hjwallet.activitys.XiaohuaActivity"></activity>
-    <activity android:name="zz.hjzn.hjwallet.activitys.StartActivity"></activity>
+    <activity android:name="zz.hjzn.hjwallet.activitys.AboutWeActivity"
+        android:screenOrientation="portrait"
+        ></activity>
+    <activity android:name="zz.hjzn.hjwallet.activitys.ShopActivity"
+        android:screenOrientation="portrait"
+        ></activity>
+    <activity android:name="zz.hjzn.hjwallet.activitys.ParitiesActivity"
+        android:screenOrientation="portrait"
+        ></activity>
+    <activity android:name="zz.hjzn.hjwallet.activitys.ParitiesListAcitivity"
+        android:screenOrientation="portrait"
+        ></activity>
+    <activity android:name="zz.hjzn.hjwallet.activitys.WebActivity"
+        android:screenOrientation="portrait"
+        ></activity>
+    <activity android:name="zz.hjzn.hjwallet.NewsActivity"
+        android:screenOrientation="portrait"
+        ></activity>
+    <activity android:name="zz.hjzn.hjwallet.activitys.XiaohuaActivity"
+        android:screenOrientation="portrait"
+        ></activity>
+    <activity android:name="zz.hjzn.hjwallet.activitys.StartActivity"
+        android:screenOrientation="portrait"
+        ></activity>
 </application>
 </manifest>

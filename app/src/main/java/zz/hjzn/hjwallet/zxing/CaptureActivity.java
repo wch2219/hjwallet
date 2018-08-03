@@ -99,7 +99,6 @@ public class CaptureActivity extends BaseActivity implements Callback {
     @BindView(R.id.btn_seletepic)
     Button btn_seletepic;
     private CaptureActivityHandler handler;
-
     private boolean hasSurface;
     private Vector<BarcodeFormat> decodeFormats;
     private String characterSet;
@@ -235,10 +234,7 @@ public class CaptureActivity extends BaseActivity implements Callback {
 //            this.setResult(RESULT_OK, resultIntent);
 
             if (!TextUtils.isEmpty(resultString) && resultString.length() == 34) {
-
                 getUserInfo(resultString);
-
-
             } else {
                 Intent intent = new Intent(ctx, EntryOtherActivity.class);
                 intent.putExtra(IntentTag.ResultCode, resultString);

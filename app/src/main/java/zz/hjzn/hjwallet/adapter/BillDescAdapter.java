@@ -40,7 +40,7 @@ public class BillDescAdapter extends BaseFastAdapter {
         }
         BiollDescModel.ResultBean resultBean = result.get(position);
         vh.tv_time.setText(resultBean.getChangeTimeStr());
-        vh.tv_num.setText(resultBean.getChangeValue()+" Gsc");
+        vh.tv_num.setText(resultBean.getChangeValue()+" DOTC");
 
         return convertView;
     }

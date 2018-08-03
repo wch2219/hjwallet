@@ -49,4 +49,6 @@ public class AboutWeActivity extends BaseActivity {
         //跳转到拨号界面，同时传递电话号码
         startActivity(dialIntent);
     }
+
+
 }

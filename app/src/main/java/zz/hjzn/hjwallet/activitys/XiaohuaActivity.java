@@ -87,17 +87,11 @@ public class XiaohuaActivity extends BaseActivity {
         getInfo();
     }
     private void getInfo() {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH");
-        Date date = null;
-        try {
-            date = simpleDateFormat.parse("2018-01-01 00");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        long ts = date.getTime()/1000;
+
+        long ts = System.currentTimeMillis()/1000;
         wch(ts);
         Map<String,String> map = new HashMap<>();
-        map.put("sort","asc");
+        map.put("sort","desc");
         map.put("key","bf85b841324d0ced93f9ef8d5b4bdeba");
         map.put("page",String.valueOf(page));
         map.put("time",String.valueOf(ts));

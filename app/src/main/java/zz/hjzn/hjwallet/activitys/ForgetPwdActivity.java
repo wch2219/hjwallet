@@ -59,17 +59,14 @@ public class ForgetPwdActivity extends BaseActivity {
         tvTitle.setText(R.string.forgetPwd);
         initTabBar(toolBar, true);
     }
-
     @Override
     protected void initListener() {
     etPhone.addTextChangedListener(new PayMentEditetxtListener(ctx,btnGetauth,true));
     }
-
     @Override
     protected Presenter createPresenter() {
         return new Presenter(this);
     }
-
     private boolean ischek;
 
     @OnClick({R.id.btn_getauth, R.id.btn_aff})
@@ -108,7 +105,7 @@ public class ForgetPwdActivity extends BaseActivity {
                     Toast.makeText(ctx, "确认密码不能为空", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                wch(pwd+";"+affpwd);
+                wch(pwd + ";" + affpwd);
                 if (!pwd.equals(affpwd)) {
                     vibrator.vibrate(100);
                     Toast.makeText(ctx, "两次密码不一致，请重新设置", Toast.LENGTH_SHORT).show();
@@ -117,17 +114,16 @@ public class ForgetPwdActivity extends BaseActivity {
                     return;
                 }
                 HttpType = 1;
-                Map<String,Object> map = new HashMap<>();
-                map.put(Parments.loginAccount,phone);
-                map.put(Parments.verifyCode,code);
-                map.put("password",pwd);
-                map.put("pwdType","1");
-                map.put("confirmPassword",affpwd);
-                mPreenter.fetch(map,true,NetUtils.ForgetPwd,"");
+                Map<String, Object> map = new HashMap<>();
+                map.put(Parments.loginAccount, phone);
+                map.put(Parments.verifyCode, code);
+                map.put("password", pwd);
+                map.put("pwdType", "1");
+                map.put("confirmPassword", affpwd);
+                mPreenter.fetch(map, true, NetUtils.ForgetPwd, "");
                 break;
         }
     }
-
     @Override
     public void showData(String s) throws IOException {
         dissProgress();
@@ -138,14 +134,17 @@ public class ForgetPwdActivity extends BaseActivity {
                     @Override
                     public void onTick(long millisUntilFinished) {
                         ischek = true;
+                        if(btnGetauth==null)
+                            return;
                         btnGetauth.setText(millisUntilFinished / 1000 + "s后重新发送");
                         btnGetauth.setTextColor(getResources().getColor(R.color.white));
                         btnGetauth.setBackgroundResource(R.drawable.shape_payment_affblue);
                     }
-
                     @Override
                     public void onFinish() {
                         ischek = false;
+                        if(btnGetauth==null)
+                            return;
                         btnGetauth.setText(R.string.getAuth);
                         btnGetauth.setTextColor(getResources().getColor(R.color.white));
                         btnGetauth.setBackgroundResource(R.drawable.shape_payment_affblue);
@@ -162,7 +161,6 @@ public class ForgetPwdActivity extends BaseActivity {
             Toast.makeText(ctx, publicModel.getErrDesc(), Toast.LENGTH_SHORT).show();
         }
     }
-
     private void sendSms() {
         String phone = etPhone.getText().toString().trim();
         if (TextUtils.isEmpty(phone) | !RegularUils.isMobileExact(phone)) {
@@ -175,5 +173,4 @@ public class ForgetPwdActivity extends BaseActivity {
         map.put(Parments.phone, phone);
         mPreenter.fetch(map, true, NetUtils.GetAuth, "");
     }
-
 }

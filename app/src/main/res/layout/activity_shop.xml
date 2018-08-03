@@ -40,7 +40,7 @@
         <TextView
             android:id="@+id/tv_price"
             style="@style/TextView16blue"
-            android:text="0 元"
+            android:text="1.00元"
             />
     </LinearLayout>
     <LinearLayout
@@ -135,7 +135,7 @@
             android:textSize="@dimen/demen_18dp" />
         <TextView
             style="@style/TextView14black"
-            android:text="个GSC"
+            android:text="个TOTC"
             />
     </LinearLayout>
         <Button

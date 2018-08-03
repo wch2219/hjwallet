@@ -117,7 +117,7 @@ public class RegisterActivity extends BaseActivity {
                     etAffpwd.setText("");
                     etPwd.setText("");
                 }
-                if (RegularUils.isNumeric(pwd)||RegularUils.isAllEnglishChar(pwd)) {
+                if (RegularUils.isNumeric(pwd) || RegularUils.isAllEnglishChar(pwd)) {
                     Toast.makeText(ctx, "密码不可为纯数字或纯英文", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -137,15 +137,15 @@ public class RegisterActivity extends BaseActivity {
                 }
                 HttpType = 1;
                 Map<String, Object> map = new HashMap<>();
-                map.put(Parments.bindMobile,phone);
-                map.put(Parments.loginAccount,phone);
-                map.put(Parments.passWord,pwd);
-                map.put(Parments.payPassWord,paypwd);
-                map.put(Parments.confirmPassWord,affpwd);
-                map.put(Parments.confirmPayPassWord,affpaypwd);
-                map.put(Parments.regType,"2");
-                map.put(Parments.verifyCode,auth);
-                mPreenter.fetch(map,false,NetUtils.Register,"");
+                map.put(Parments.bindMobile, phone);
+                map.put(Parments.loginAccount, phone);
+                map.put(Parments.passWord, pwd);
+                map.put(Parments.payPassWord, paypwd);
+                map.put(Parments.confirmPassWord, affpwd);
+                map.put(Parments.confirmPayPassWord, affpaypwd);
+                map.put(Parments.regType, "2");
+                map.put(Parments.verifyCode, auth);
+                mPreenter.fetch(map, false, NetUtils.Register, "");
                 break;
         }
     }
@@ -173,13 +173,18 @@ public class RegisterActivity extends BaseActivity {
                     @Override
                     public void onTick(long millisUntilFinished) {
                         ischek = true;
+                        if (btnGetauth == null)
+                            return;
                         btnGetauth.setText(millisUntilFinished / 1000 + "s后重新发送");
                         btnGetauth.setTextColor(getResources().getColor(R.color.white));
                         btnGetauth.setBackgroundResource(R.drawable.shape_payment_affblue);
                     }
+
                     @Override
                     public void onFinish() {
                         ischek = false;
+                        if (btnGetauth == null)
+                            return;
                         btnGetauth.setText(R.string.getAuth);
                         btnGetauth.setTextColor(getResources().getColor(R.color.white));
                         btnGetauth.setBackgroundResource(R.drawable.shape_payment_affblue);
@@ -188,12 +193,12 @@ public class RegisterActivity extends BaseActivity {
             } else {
                 Toast.makeText(ctx, publicModel.getErrDesc(), Toast.LENGTH_SHORT).show();
             }
-        }else{
+        } else {
             PublicModel publicModel = gson.fromJson(s, PublicModel.class);
             if (publicModel.getErrCode() == RequestCode.SuccessCode) {
                 Toast.makeText(ctx, publicModel.getErrDesc(), Toast.LENGTH_SHORT).show();
                 finish();
-            }else{
+            } else {
                 Toast.makeText(ctx, publicModel.getErrDesc(), Toast.LENGTH_SHORT).show();
             }
         }

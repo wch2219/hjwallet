@@ -166,7 +166,7 @@ public class ShopActivity extends BaseActivity {
                 total = zhongchuangBean.getResult().getHoldGscNum();
                 tvTotal.setText( total+ "");
                 tvShifang.setText(zhongchuangBean.getResult().getGscNum()+"");
-                getPrice();
+//                getPrice();
             } else {
                 Toast.makeText(ctx, zhongchuangBean.getErrDesc(), Toast.LENGTH_SHORT).show();
             }

@@ -90,7 +90,6 @@ public class HomeFragment extends BaseFragment implements BaseRecrviewAdapter.On
     protected void initListener() {
 
     }
-
     @Override
     public void setOnClick(int position) {
         switch (position) {

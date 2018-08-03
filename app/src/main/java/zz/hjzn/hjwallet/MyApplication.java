@@ -41,7 +41,9 @@ public class MyApplication extends Application {
             Set<String> tags = new HashSet<>();
             tags.add(sessionId);
             JPushInterface.setTags(getApplicationContext(), 1, tags);
+
         }
+
     }
     //    @Override
 //    protected void attachBaseContext(Context base) {

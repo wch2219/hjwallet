@@ -49,6 +49,7 @@ public class ChangePayPwdActivity extends BaseActivity {
     @BindView(R.id.btn_aff)
     Button btnAff;
     private int HttpType;//0短信验证  1  注册
+
     @Override
     protected void initView() {
         setContentView(R.layout.activity_change_pay_pwd);
@@ -62,7 +63,7 @@ public class ChangePayPwdActivity extends BaseActivity {
 
     @Override
     protected void initListener() {
-        etPhone.addTextChangedListener(new PayMentEditetxtListener(ctx,btnGetauth,true));
+        etPhone.addTextChangedListener(new PayMentEditetxtListener(ctx, btnGetauth, true));
     }
 
     @Override
@@ -108,7 +109,7 @@ public class ChangePayPwdActivity extends BaseActivity {
                     Toast.makeText(ctx, "确认密码不能为空", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                wch(pwd+";"+affpwd);
+                wch(pwd + ";" + affpwd);
                 if (!pwd.equals(affpwd)) {
                     vibrator.vibrate(100);
                     Toast.makeText(ctx, "两次密码不一致，请重新设置", Toast.LENGTH_SHORT).show();
@@ -117,13 +118,13 @@ public class ChangePayPwdActivity extends BaseActivity {
                     return;
                 }
                 HttpType = 1;
-                Map<String,Object> map = new HashMap<>();
-                map.put(Parments.loginAccount,phone);
-                map.put(Parments.verifyCode,code);
-                map.put("password",pwd);
-                map.put("pwdType","2");
-                map.put("confirmPassword",affpwd);
-                mPreenter.fetch(map,true,NetUtils.ForgetPwd,"");
+                Map<String, Object> map = new HashMap<>();
+                map.put(Parments.loginAccount, phone);
+                map.put(Parments.verifyCode, code);
+                map.put("password", pwd);
+                map.put("pwdType", "2");
+                map.put("confirmPassword", affpwd);
+                mPreenter.fetch(map, true, NetUtils.ForgetPwd, "");
                 break;
         }
     }
@@ -154,7 +155,7 @@ public class ChangePayPwdActivity extends BaseActivity {
             } else {
                 Toast.makeText(ctx, publicModel.getErrDesc(), Toast.LENGTH_SHORT).show();
             }
-        }else{
+        } else {
             PublicModel publicModel = gson.fromJson(s, PublicModel.class);
             if (publicModel.getErrCode() == RequestCode.SuccessCode) {
                 finish();
